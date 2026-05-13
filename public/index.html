@@ -1,381 +1,2477 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cognitiva | Engenharia de Transposição Didática</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* MAPEAMENTO DE FONTES */
-        @font-face { font-family: 'Syndra'; src: local('Montserrat ExtraBold'), local('Arial Black'); font-weight: 800; }
-        @font-face { font-family: 'Alphazet'; src: local('Inter'), local('Segoe UI'); font-weight: 400; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="Cognitiva — Engenharia de Transposição Didática. Conformidade de acessibilidade para instituições de ensino superior." />
+<meta name="keywords" content="Transposição Didática, Acessibilidade MEC 2027, Retenção alunos neurodivergentes, Transposição Didática IES, Conformidade WCAG IES, Acessibilidade educacional, Adaptação de conteúdo acadêmico, LTI Moodle Canvas Blackboard, Educação inclusiva TEA, Neurodiversidade ensino superior, INEP acessibilidade, Acervo digital acessível, AVA acessível, Material didático adaptado" />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="Cognitiva · Engenharia de Transposição Didática" />
+<meta property="og:description" content="Conformidade de acessibilidade MEC 2027 para IES. Transposição Didática auditada para alunos neurodivergentes." />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#02253D" />
+<title>Cognitiva · Engenharia de Transposição Didática</title>
 
-        :root {
-            --azul-cognitiva: #02253D;
-            --azul-gradiente: #053b61;
-            --ocre: #E0B565;
-            --off-white: #F9F9F9;
-            --cinza-ardosia: #3E424B;
-        }
+<!-- ============================================================
+     FONTES: Montserrat (Syndra / títulos) + Inter (Alphazet / corpo) + OpenDyslexic
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/opendyslexic" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        body { font-family: 'Alphazet', sans-serif; background-color: var(--off-white); color: var(--azul-cognitiva); overflow-x: hidden; }
-        .font-syndra { font-family: 'Syndra', sans-serif; }
-        .hidden { display: none; }
+<style>
+/* ============================================================
+   RESET — Consistência cross-browser
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+img, svg, iframe { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 3px solid var(--ocre); outline-offset: 3px; border-radius: 4px; }
 
-        /* HEADER GLASSMORPHISM */
-        .glass-header {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
-            background: rgba(249, 249, 249, 0.85);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(2, 37, 61, 0.08);
-            transition: all 0.5s ease;
-        }
-        .demo-mode .glass-header {
-            background: rgba(2, 37, 61, 0.85);
-            border-bottom: 1px solid rgba(224, 181, 101, 0.2);
-        }
+/* ============================================================
+   DESIGN TOKENS — Paleta Cognitiva (Single Source of Truth)
+   Alterar aqui propaga para todo o layout.
+============================================================ */
+:root {
+  /* === PALETA INSTITUCIONAL COGNITIVA === */
+  --marinho:        #02253D;   /* Cor primária: Marinho profundo         */
+  --marinho-grad:   #053b61;   /* Variante mais clara para gradientes    */
+  --ocre:           #E0B565;   /* Cor de acento: Ouro / Âmbar            */
+  --ocre-soft:      rgba(224, 181, 101, 0.15); /* Ocre translúcido para fundos  */
+  --off-white:      #F9F9F9;   /* Fundo principal                        */
+  --cinza-ardosia:  #3E424B;   /* Texto secundário                       */
+  --cinza-claro:    #F0F2F5;   /* Fundo de seções alternadas             */
+  --borda-suave:    rgba(2, 37, 61, 0.08);
 
-        /* FUNDO TÉCNICO (GRID) */
-        .technical-grid {
-            background-image: radial-gradient(rgba(2, 37, 61, 0.06) 1.5px, transparent 1.5px);
-            background-size: 50px 50px;
-        }
+  /* === TIPOGRAFIA (mapeada às fontes institucionais) === */
+  --font-syndra:    'Montserrat', 'Arial Black', system-ui, sans-serif;  /* Títulos */
+  --font-alphazet:  'Inter', 'Segoe UI', system-ui, sans-serif;          /* Corpo   */
 
-        /* BARRA DE PROGRESSO */
-        #progress-bar {
-            position: fixed; top: 0; left: 0; height: 5px; background: var(--ocre);
-            width: 0%; z-index: 10000; transition: width 0.15s ease-out;
-            box-shadow: 0 0 20px rgba(224, 181, 101, 0.7);
-        }
+  /* === ESPACAMENTOS E FORMAS === */
+  --section-pad:    clamp(4rem, 8vw, 8rem);
+  --radius:         12px;
+  --radius-sm:      8px;
+  --shadow-soft:    0 4px 20px rgba(2, 37, 61, 0.06);
+  --shadow-elev:    0 10px 40px rgba(2, 37, 61, 0.12);
+  --transition:     0.3s ease;
 
-        /* ANIMAÇÃO DOBRA 4 */
-        .extract-box { 
-            position: absolute; background: white; padding: 35px; border-left: 10px solid var(--ocre); 
-            box-shadow: 0 40px 80px rgba(2,37,61,0.18); width: 420px; text-align: left; 
-            z-index: 20; border-radius: 0 15px 15px 0; opacity: 0; transform: scale(0.6);
-            box-sizing: border-box;
-        }
-        .extract-box.animate-zoom { animation: zoomInEmergence 2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes zoomInEmergence { to { opacity: 1; transform: scale(1); } }
+  /* === VARIÁVEIS DE ACESSIBILIDADE (sobrescritas pelos modos) === */
+  --bg-main:        var(--off-white);
+  --bg-elevated:    #FFFFFF;
+  --bg-section-alt: var(--cinza-claro);
+  --text-primary:   var(--marinho);
+  --text-body:      var(--cinza-ardosia);
+  --text-muted:     #6B6B70;
+  --accent:         var(--ocre);
+  --accent-soft:    var(--ocre-soft);
+}
 
-        /* AMBIENTE DE CINEMA NA DEMO */
-        .demo-ambient-light {
-            background: radial-gradient(circle at 50% 40%, var(--azul-gradiente) 0%, var(--azul-cognitiva) 100%);
-        }
+/* ============================================================
+   BASE — Tipografia e estrutura fundamental
+============================================================ */
+body {
+  font-family: var(--font-alphazet);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text-body);
+  background-color: var(--bg-main);
+  overflow-x: hidden;
+  transition: background-color var(--transition), color var(--transition);
+}
 
-        .modal-input { width: 100%; padding: 16px; border: 1px solid var(--azul-cognitiva); background: transparent; outline: none; color: var(--azul-cognitiva); font-weight: 500; }
-        .modal-input:focus { border-color: var(--ocre); background: rgba(224, 181, 101, 0.03); }
+/* Fundo técnico com grid de pontos — identidade visual Cognitiva */
+body.technical-grid {
+  background-image: radial-gradient(rgba(2, 37, 61, 0.055) 1.5px, transparent 1.5px);
+  background-size: 50px 50px;
+  background-attachment: fixed;
+}
 
-        /* AJUSTES BLINDADOS PARA MOBILE */
-        @media (max-width: 1023px) { 
-            .extract-box { 
-                position: relative !important; 
-                width: 100% !important; 
-                margin: 15px 0 !important; 
-                padding: 25px !important;
-                left: auto !important; right: auto !important; top: auto !important; bottom: auto !important; 
-                transform: none !important; opacity: 1 !important; animation: none !important; 
-            } 
-        }
-    </style>
+h1, h2, h3, h4 {
+  font-family: var(--font-syndra);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+h3 { font-size: clamp(1.15rem, 2vw, 1.5rem); }
+p { margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+strong { color: var(--text-primary); font-weight: 700; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+/* ============================================================
+   BARRA DE PROGRESSO DE ROLAGEM
+   Posição: topo fixo, largura proporcional ao scroll
+============================================================ */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 4px;
+  background: var(--ocre);
+  width: 0%;
+  z-index: 10000;
+  transition: width 0.15s ease-out;
+  box-shadow: 0 0 18px rgba(224, 181, 101, 0.6);
+}
+
+/* ============================================================
+   HEADER — Glassmorphism com identidade Cognitiva
+============================================================ */
+.glass-header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 500;
+  background: rgba(249, 249, 249, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--borda-suave);
+  transition: background var(--transition), border-color var(--transition);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem clamp(1.25rem, 5vw, 2.5rem);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.logo-text {
+  font-family: var(--font-syndra);
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  color: var(--marinho);
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+.logo-text span { color: var(--ocre); }
+
+.btn-header {
+  font-family: var(--font-syndra);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  background: var(--marinho);
+  color: #fff;
+  border-radius: 2px;
+  transition: filter var(--transition), transform var(--transition);
+}
+.btn-header:hover { filter: brightness(1.25); transform: translateY(-1px); }
+
+/* ============================================================
+   DOBRA 1 — HERO
+   Contador TEA + proposta de valor institucional
+============================================================ */
+#dobra-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--section-pad) + 5rem) clamp(1.25rem, 5vw, 2.5rem) var(--section-pad);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .hero-grid { grid-template-columns: 1.3fr 0.7fr; gap: 5rem; }
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--ocre);
+  color: var(--marinho);
+  font-family: var(--font-syndra);
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 3px;
+  margin-bottom: 1.5rem;
+}
+.hero-title {
+  color: var(--marinho);
+  margin-bottom: 1.5rem;
+  max-width: 18ch;
+}
+.hero-sub {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--text-body);
+  font-weight: 400;
+  max-width: 52ch;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+.btn-hero {
+  font-family: var(--font-syndra);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 1.25rem 2.75rem;
+  background: var(--marinho);
+  color: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  transition: filter var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 8px 30px rgba(2, 37, 61, 0.2);
+}
+.btn-hero:hover {
+  filter: brightness(1.3);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(2, 37, 61, 0.25);
+}
+
+/* Widget do contador TEA */
+.counter-widget {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  border: 2px solid rgba(62, 66, 75, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 20px 60px rgba(2, 37, 61, 0.1);
+  margin: 0 auto;
+}
+@media (min-width: 1024px) { .counter-widget { width: 400px; height: 400px; } }
+.counter-ring {
+  position: absolute;
+  inset: 0;
+  border-top: 2px solid rgba(224, 181, 101, 0.35);
+  border-radius: 50%;
+  transform: rotate(45deg);
+}
+.counter-inner { text-align: center; position: relative; z-index: 1; }
+.counter-number {
+  display: block;
+  font-family: var(--font-syndra);
+  font-size: clamp(4.5rem, 8vw, 6.5rem);
+  font-weight: 900;
+  color: var(--marinho);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.counter-label {
+  font-family: var(--font-alphazet);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--cinza-ardosia);
+  border-top: 1px solid var(--ocre);
+  padding-top: 1rem;
+  display: inline-block;
+}
+
+/* ============================================================
+   DOBRA 2 — RISK MAP
+   Três cards dos gargalos de retenção
+============================================================ */
+#dobra-risk {
+  background: var(--marinho);
+  padding: var(--section-pad) clamp(1.25rem, 5vw, 2.5rem);
+  text-align: center;
+}
+.risk-title {
+  font-family: var(--font-syndra);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--ocre);
+  font-weight: 800;
+  margin-bottom: 4rem;
+  max-width: 700px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+}
+.risk-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) { .risk-grid { grid-template-columns: repeat(3, 1fr); } }
+.risk-card {
+  padding: 3rem 2rem;
+  border: 1px solid rgba(224, 181, 101, 0.25);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  cursor: default;
+}
+.risk-card:hover {
+  background: rgba(224, 181, 101, 0.06);
+  border-color: rgba(224, 181, 101, 0.55);
+  transform: translateY(-4px);
+}
+.risk-card i {
+  color: var(--ocre);
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+.risk-card h3 {
+  font-family: var(--font-syndra);
+  color: var(--ocre);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+.risk-card p {
+  font-size: 1rem;
+  color: rgba(249, 249, 249, 0.78);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ============================================================
+   DOBRA 3 — HUMAN FILTER
+   Fluxo de validação psicopedagógica
+============================================================ */
+#dobra-filter {
+  background: var(--bg-main);
+  padding: var(--section-pad) clamp(1.25rem, 5vw, 2.5rem);
+}
+.filter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (min-width: 1024px) { .filter-grid { grid-template-columns: 1fr 1fr; gap: 6rem; } }
+.filter-headline {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--marinho);
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+.filter-headline em {
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(2, 37, 61, 0.6);
+}
+.filter-body {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--text-body);
+  margin-bottom: 2rem;
+}
+.filter-quote {
+  border-left: 4px solid var(--ocre);
+  padding-left: 1.5rem;
+  color: var(--text-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Caixa de fluxo visual */
+.flow-box {
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-elev);
+  border: 1px solid var(--borda-suave);
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.flow-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--ocre);
+}
+.flow-step {
+  width: 100%;
+  text-align: center;
+  padding: 1.1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-syndra);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.flow-step-in {
+  border: 2px dashed rgba(2, 37, 61, 0.25);
+  background: var(--bg-section-alt);
+  color: rgba(2, 37, 61, 0.6);
+}
+.flow-step-mid {
+  border: 2px solid var(--ocre);
+  background: var(--ocre-soft);
+  color: var(--marinho);
+  font-size: 0.85rem;
+}
+.flow-step-out {
+  background: var(--marinho);
+  color: #fff;
+}
+.flow-arrow {
+  color: var(--ocre);
+  font-size: 1.4rem;
+  animation: bounce 1.4s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* ============================================================
+   DOBRA 4 — SHOWCASE DE ATIVO (VÍDEO)
+   Seção centralizada com iframe YouTube
+============================================================ */
+#dobra-video {
+  background: linear-gradient(160deg, var(--marinho-grad) 0%, var(--marinho) 100%);
+  padding: var(--section-pad) clamp(1.25rem, 5vw, 2.5rem);
+  text-align: center;
+}
+.video-eyebrow {
+  font-family: var(--font-syndra);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(224, 181, 101, 0.7);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+.video-title {
+  font-family: var(--font-syndra);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--ocre);
+  font-weight: 900;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.03em;
+}
+.video-sub {
+  color: rgba(249, 249, 249, 0.8);
+  font-size: 1.1rem;
+  max-width: 60ch;
+  margin: 0 auto 3.5rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+.video-frame-wrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 0 80px rgba(224, 181, 101, 0.15), 0 30px 80px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(224, 181, 101, 0.2);
+}
+.video-frame-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ============================================================
+   DOBRA 5 — A DIFERENÇA TÁTIL (SPLIT-SCREEN SLIDER)
+   Slider Antes/Depois com cores adaptadas à identidade Cognitiva
+============================================================ */
+#dobra-split {
+  background: var(--bg-main);
+  padding: var(--section-pad) clamp(1.25rem, 5vw, 2.5rem);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-inline: auto;
+}
+.section-header h2 { margin-bottom: 0.75rem; color: var(--marinho); }
+.section-header p { color: var(--text-muted); font-size: 1.05rem; }
+
+/* Container principal do slider */
+.split-container {
+  position: relative;
+  max-width: 1100px;
+  margin: 2.5rem auto 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-elev);
+  user-select: none;
+  aspect-ratio: 16 / 11;
+  background: #fff;
+  touch-action: none;
+  border: 1px solid var(--borda-suave);
+}
+@media (min-width: 768px) { .split-container { aspect-ratio: 16 / 9; } }
+
+/* Camada base (documento estático – fundo) */
+.split-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.split-layer-static {
+  background: #ECEEF0;
+  padding: 2.5rem 2rem;
+  font-family: 'Times New Roman', serif;
+  color: #4a4a4a;
+  filter: grayscale(0.85) contrast(0.95);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  overflow-y: auto;
+}
+.split-layer-static h4 {
+  font-family: 'Times New Roman', serif;
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #3a3a3a;
+  font-weight: 700;
+}
+.split-layer-static p {
+  text-align: justify;
+  text-indent: 1.5em;
+  margin-bottom: 0.4rem;
+}
+
+/* Camada Cognitiva (sobreposta com clip-path) – adaptada ao Marinho/Ouro */
+.split-layer-cognitiva {
+  background: var(--bg-elevated);
+  padding: 2rem;
+  overflow-y: auto;
+  clip-path: inset(0 0 0 50%);
+  transition: none;
+}
+.split-layer-cognitiva h4 {
+  font-family: var(--font-syndra);
+  color: var(--marinho);
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 0.85rem;
+}
+.split-layer-cognitiva p {
+  font-family: var(--font-alphazet);
+  font-size: 0.95rem;
+  margin-bottom: 0.85rem;
+  color: var(--cinza-ardosia);
+}
+.split-layer-cognitiva ul {
+  margin: 0 0 1rem 1.25rem;
+  color: var(--cinza-ardosia);
+  font-size: 0.95rem;
+}
+.split-layer-cognitiva li { margin-bottom: 0.35rem; }
+.split-layer-cognitiva strong { color: var(--marinho); }
+
+/* Mini box dentro da camada cognitiva */
+.split-mini-box {
+  background: var(--ocre-soft);
+  border-left: 3px solid var(--ocre);
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  margin-top: 0.85rem;
+  color: var(--cinza-ardosia);
+}
+.split-mini-box strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--marinho);
+}
+
+/* Labels das camadas */
+.split-label {
+  position: absolute;
+  top: 0.85rem;
+  font-family: var(--font-syndra);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 4;
+}
+.split-label-static  { left: 0.85rem; background: rgba(62,66,75,0.85); color: #fff; }
+.split-label-cognitiva { right: 0.85rem; background: var(--marinho); color: #fff; }
+
+/* Divisor e handle — cores Cognitiva */
+.split-divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--ocre);
+  z-index: 5;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.split-handle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: var(--ocre);
+  border: 3px solid var(--marinho);
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  color: var(--marinho);
+  font-size: 1.1rem;
+  font-weight: 900;
+  cursor: ew-resize;
+  pointer-events: auto;
+  box-shadow: 0 4px 16px rgba(2, 37, 61, 0.25);
+  transition: transform var(--transition);
+}
+.split-handle:hover { transform: translate(-50%, -50%) scale(1.12); }
+
+/* Range acessível invisível */
+.split-range {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 7;
+  margin: 0;
+}
+
+/* Tooltip de convite — cores Cognitiva */
+.split-tooltip {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--marinho);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: var(--font-alphazet);
+  z-index: 8;
+  pointer-events: none;
+  white-space: nowrap;
+  animation: floatHint 2s ease-in-out infinite;
+  box-shadow: var(--shadow-elev);
+}
+.split-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px; left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px; height: 12px;
+  background: var(--marinho);
+}
+.split-tooltip.hide { opacity: 0; transition: opacity 0.4s; }
+@keyframes floatHint {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* ============================================================
+   DOBRA 6 — UNIDADE DEMONSTRATIVA (SPA Viewport)
+   Conteúdo JSON injetado com scroll reveal suave
+============================================================ */
+#dobra-demo {
+  background: var(--bg-elevated);
+  padding: var(--section-pad) clamp(1.25rem, 5vw, 2.5rem);
+  border-top: 1px solid var(--borda-suave);
+}
+
+/* Área de renderização dinâmica — cores Cognitiva */
+#render-area {
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+#render-area.visible { opacity: 1; transform: translateY(0); }
+#render-area h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: var(--marinho);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--ocre);
+}
+#render-area h3 {
+  font-size: 1.2rem;
+  color: var(--marinho);
+  margin: 2.5rem 0 0.85rem;
+  font-weight: 700;
+}
+#render-area p { color: var(--text-body); margin-bottom: 1.1rem; line-height: 1.75; }
+#render-area ul, #render-area ol { margin: 0 0 1.25rem 1.5rem; }
+#render-area li { margin-bottom: 0.6rem; color: var(--text-body); }
+
+/* Box de destaque — adaptado para o sistema Marinho/Ouro */
+.box-destaque {
+  background: var(--ocre-soft);
+  border-left: 4px solid var(--ocre);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+.box-destaque .box-label {
+  display: block;
+  font-family: var(--font-syndra);
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--marinho);
+  margin-bottom: 0.5rem;
+}
+.box-destaque p { margin: 0; color: var(--text-body); }
+
+/* Tooltip / Glossário */
+.glossario {
+  position: relative;
+  border-bottom: 2px dotted var(--ocre);
+  cursor: help;
+  font-weight: 600;
+  color: var(--marinho);
+}
+.glossario::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--marinho);
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 400;
+  font-family: var(--font-alphazet);
+  width: max-content;
+  max-width: 260px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 20;
+  box-shadow: var(--shadow-elev);
+}
+.glossario:hover::after, .glossario:focus::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Acordeão */
+.accordion { margin: 1rem 0; }
+.accordion-item {
+  border: 1px solid var(--borda-suave);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  background: var(--bg-main);
+}
+.accordion-trigger {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  font-family: var(--font-alphazet);
+  color: var(--marinho);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color var(--transition);
+}
+.accordion-trigger:hover { background: var(--ocre-soft); }
+.accordion-trigger[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.chev { transition: transform var(--transition); font-size: 0.9rem; }
+.accordion-panel {
+  padding: 0 1.25rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding var(--transition);
+  color: var(--text-body);
+}
+.accordion-panel.open {
+  padding: 0 1.25rem 1.25rem;
+  max-height: 1000px;
+}
+
+/* ============================================================
+   DOBRA 7 — AMPARO TÉCNICO E CIENTÍFICO
+   Cards de fundamentação e conformidade regulatória
+============================================================ */
+#dobra-amparo {
+  background: var(--bg-section-alt);
+  padding: var(--section-pad) clamp(1.25rem, 5vw, 2.5rem);
+  border-top: 1px solid var(--borda-suave);
+}
+.amparo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+}
+@media (min-width: 768px) { .amparo-grid { grid-template-columns: repeat(3, 1fr); } }
+.amparo-card {
+  background: var(--bg-elevated);
+  padding: 2.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+  border-top: 4px solid var(--marinho);
+}
+.amparo-card:nth-child(2) { border-top-color: var(--ocre); }
+.amparo-card h3 {
+  font-family: var(--font-syndra);
+  color: var(--marinho);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+.amparo-list { list-style: none; padding: 0; margin: 0; }
+.amparo-list li {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--borda-suave);
+  color: var(--text-body);
+  font-size: 0.97rem;
+  line-height: 1.65;
+}
+.amparo-list li:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+.amparo-list i { color: var(--ocre); flex-shrink: 0; margin-top: 3px; }
+
+/* ============================================================
+   DOBRA 8 — FOOTER DE CONVERSÃO
+   CTA final + modal de formulário
+============================================================ */
+#dobra-footer {
+  background: linear-gradient(180deg, var(--off-white) 0%, #e8eaed 100%);
+  padding: var(--section-pad) clamp(1.25rem, 5vw, 2.5rem);
+  text-align: center;
+  border-top: 1px solid #dcdde0;
+}
+.footer-headline {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--marinho);
+  font-weight: 900;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.btn-cta {
+  font-family: var(--font-syndra);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 1.5rem 3.5rem;
+  background: var(--marinho);
+  color: #fff;
+  display: inline-block;
+  border-radius: 2px;
+  transition: filter var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 12px 40px rgba(2, 37, 61, 0.25);
+}
+.btn-cta:hover {
+  filter: brightness(1.25);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(2, 37, 61, 0.3);
+}
+.footer-legal {
+  margin-top: 5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid #d0d2d7;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 2.2;
+  max-width: 800px;
+  margin-inline: auto;
+  margin-top: 5rem;
+}
+.footer-legal strong { color: var(--marinho); display: block; margin-top: 1rem; font-size: 0.75rem; }
+
+/* ============================================================
+   MODAL DE AGENDAMENTO
+   Overlay + formulário de conversão
+============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 14, 26, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 1.25rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--bg-elevated);
+  max-width: 640px;
+  width: 100%;
+  padding: clamp(2rem, 5vw, 4rem);
+  position: relative;
+  border-radius: var(--radius);
+  box-shadow: 0 30px 100px rgba(2, 37, 61, 0.4);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-close {
+  position: absolute;
+  top: 1.25rem; right: 1.25rem;
+  color: var(--marinho);
+  font-size: 1.5rem;
+  transition: color var(--transition);
+}
+.modal-close:hover { color: var(--ocre); }
+.modal-title {
+  font-family: var(--font-syndra);
+  font-size: 1.4rem;
+  color: var(--marinho);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.modal-sub {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem; }
+.form-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--marinho);
+  font-family: var(--font-syndra);
+}
+.form-input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(2, 37, 61, 0.2);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--marinho);
+  font-family: var(--font-alphazet);
+  font-size: 0.97rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+.form-input:focus {
+  border-color: var(--ocre);
+  box-shadow: 0 0 0 3px var(--ocre-soft);
+}
+.btn-submit {
+  width: 100%;
+  padding: 1.2rem;
+  background: var(--marinho);
+  color: #fff;
+  font-family: var(--font-syndra);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: filter var(--transition);
+  margin-top: 0.5rem;
+}
+.btn-submit:hover { filter: brightness(1.3); }
+
+/* ============================================================
+   PAINEL DE ACESSIBILIDADE (FAB + PANEL)
+   Motor de acessibilidade do Portfolio.html integrado
+============================================================ */
+.a11y-fab {
+  position: fixed;
+  bottom: 1.5rem; right: 1.5rem;
+  z-index: 300;
+  background: var(--marinho);
+  color: #fff;
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 24px rgba(2, 37, 61, 0.35);
+  transition: transform var(--transition), background-color var(--transition);
+  border: 2px solid rgba(224, 181, 101, 0.3);
+}
+.a11y-fab:hover { transform: scale(1.08); background: var(--marinho-grad); }
+.a11y-fab svg { width: 26px; height: 26px; }
+
+.a11y-panel {
+  position: fixed;
+  bottom: 5.75rem; right: 1.5rem;
+  z-index: 299;
+  width: min(340px, calc(100vw - 3rem));
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(2, 37, 61, 0.2);
+  padding: 1.5rem 1.25rem;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform var(--transition), opacity var(--transition);
+  border: 1px solid var(--borda-suave);
+}
+.a11y-panel.open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.a11y-panel h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: var(--marinho);
+  font-family: var(--font-syndra);
+  font-weight: 800;
+}
+.a11y-panel .panel-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+.a11y-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--borda-suave);
+}
+.a11y-row:last-of-type { border-bottom: none; }
+.a11y-row-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-body);
+  flex: 1;
+}
+.a11y-row-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.toggle {
+  position: relative;
+  width: 44px; height: 24px;
+  background: #C4C4CB;
+  border-radius: 999px;
+  transition: background-color var(--transition);
+  flex-shrink: 0;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 20px; height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--transition);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.toggle[aria-checked="true"] { background: var(--marinho); }
+.toggle[aria-checked="true"]::after { transform: translateX(20px); }
+.panel-reset {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.7rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--borda-suave);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color var(--transition);
+}
+.panel-reset:hover { background: var(--ocre-soft); color: var(--marinho); }
+
+/* ============================================================
+   MODOS DE ACESSIBILIDADE — Sobrescrevem variáveis globais
+   Os modos afetam TODAS as seções simultaneamente.
+============================================================ */
+
+/* DARK MODE
+   Filosofia: fundo escuro acinzentado (não preto puro), texto claro com boa
+   luminância. Azul-marinho original é substituído por azul-aço claro (#7EB8D4)
+   para manter a identidade da marca sem sumir no fundo escuro.
+============================================================ */
+body.dark-mode {
+  --bg-main:        #16181C;   /* Fundo principal: grafite escuro, não preto puro  */
+  --bg-elevated:    #1F2227;   /* Cards / painéis elevados                         */
+  --bg-section-alt: #1A1C21;   /* Seções alternadas                                */
+  --text-primary:   #D6E4ED;   /* Títulos: azul-aço muito claro — legível no escuro */
+  --text-body:      #B8C4CC;   /* Corpo: cinza-azulado claro                        */
+  --text-muted:     #7E8D96;   /* Muted: cinza médio                               */
+  --borda-suave:    rgba(214, 228, 237, 0.1);
+  --ocre-soft:      rgba(224,181,101,0.12);
+  /* Redefine o marinho para azul-aço legível no modo escuro */
+  --marinho:        #7EB8D4;
+  --marinho-grad:   #5FA0BF;
+}
+body.dark-mode .glass-header {
+  background: rgba(22, 24, 28, 0.9);
+  border-bottom: 1px solid rgba(126, 184, 212, 0.15);
+}
+body.dark-mode .logo-text { color: #D6E4ED; }
+body.dark-mode .logo-text span { color: var(--ocre); }
+
+/* Seções com fundo Marinho original precisam de ajuste manual no dark */
+body.dark-mode #dobra-risk {
+  background: #101820;  /* Azul-marinho escuro em vez de preto absoluto */
+}
+body.dark-mode #dobra-video {
+  background: linear-gradient(160deg, #0d1e2e 0%, #081219 100%);
+}
+body.dark-mode #dobra-footer {
+  background: linear-gradient(180deg, #12151a 0%, #0c0f13 100%);
+  border-top-color: rgba(214,228,237,0.08);
+}
+
+/* Textos e elementos que usavam var(--marinho) hardcoded precisam de override */
+body.dark-mode .hero-title,
+body.dark-mode #render-area h2,
+body.dark-mode #render-area h3,
+body.dark-mode .filter-headline,
+body.dark-mode .amparo-card h3,
+body.dark-mode .accordion-trigger { color: var(--text-primary); }
+
+body.dark-mode .counter-number { color: var(--text-primary); }
+body.dark-mode .counter-label { color: var(--text-body); border-top-color: var(--ocre); }
+
+body.dark-mode .flow-step-in {
+  background: #252830;
+  border-color: rgba(214,228,237,0.2);
+  color: var(--text-muted);
+}
+body.dark-mode .flow-step-mid {
+  background: rgba(224,181,101,0.1);
+  border-color: var(--ocre);
+  color: var(--ocre);
+}
+body.dark-mode .flow-step-out {
+  background: #2a3a47;
+  color: #D6E4ED;
+}
+
+body.dark-mode .amparo-card { border-top-color: var(--marinho); }
+body.dark-mode .amparo-card:nth-child(2) { border-top-color: var(--ocre); }
+body.dark-mode .amparo-list i { color: var(--ocre); }
+body.dark-mode .split-layer-static { filter: grayscale(0.85) contrast(0.6) brightness(0.65); }
+body.dark-mode .split-label-cognitiva { background: #2a3a47; }
+
+/* Glossário tooltip no dark */
+body.dark-mode .glossario::after {
+  background: #2a3a47;
+  color: #D6E4ED;
+}
+
+body.dark-mode strong { color: var(--ocre); }
+body.dark-mode .box-destaque .box-label { color: var(--text-primary); }
+body.dark-mode.technical-grid {
+  background-image: radial-gradient(rgba(126,184,212,0.06) 1.5px, transparent 1.5px);
+}
+
+/* "O Rigor do Sucesso na Aprendizagem" — o <em> tem cor hardcoded rgba(2,37,61,0.6),
+   some no fundo escuro. Forçar azul-aço claro muted. */
+body.dark-mode .filter-headline em { color: rgba(182, 210, 228, 0.7); }
+
+/* Texto da camada direita do slider (disciplina adaptada) — cinza fica ilegível
+   no dark. Força branco para máxima legibilidade. */
+body.dark-mode .split-layer-cognitiva p,
+body.dark-mode .split-layer-cognitiva li,
+body.dark-mode .split-layer-cognitiva h4 { color: #E8EFF4; }
+body.dark-mode .split-layer-cognitiva { background: #1F2227; }
+body.dark-mode .split-mini-box { background: rgba(224,181,101,0.1); color: #D6E4ED; }
+
+/* SEPIA MODE */
+body.sepia-mode {
+  --bg-main:        #F4ECD8;
+  --bg-elevated:    #FBF5E5;
+  --bg-section-alt: #EDE4CC;
+  --text-primary:   #5C3D1E;
+  --text-body:      #4a3214;
+  --text-muted:     #7A5B36;
+  --borda-suave:    rgba(92,61,30,0.12);
+  --ocre:           #C9A66B;
+  --ocre-soft:      rgba(201,166,107,0.18);
+}
+body.sepia-mode .glass-header { background: rgba(244,236,216,0.85); }
+
+/* HIGH CONTRAST (WCAG AAA) */
+body.high-contrast {
+  --bg-main:        #000;
+  --bg-elevated:    #000;
+  --bg-section-alt: #000;
+  --text-primary:   #FFFF00;
+  --text-body:      #FFF;
+  --text-muted:     #FFF;
+  --borda-suave:    #FFFF00;
+  --ocre:           #FFFF00;
+  --ocre-soft:      rgba(255,255,0,0.12);
+  --marinho:        #FFFF00;
+}
+body.high-contrast .glass-header { background: rgba(0,0,0,0.95); border-bottom: 2px solid #FFFF00; }
+body.high-contrast .logo-text { color: #FFFF00; }
+body.high-contrast #dobra-risk,
+body.high-contrast #dobra-video,
+body.high-contrast #dobra-filter,
+body.high-contrast #dobra-demo,
+body.high-contrast #dobra-amparo,
+body.high-contrast #dobra-footer { background: #000; }
+body.high-contrast .risk-card { border: 2px solid #FFFF00; }
+body.high-contrast .btn-header,
+body.high-contrast .btn-hero,
+body.high-contrast .btn-cta { background: #FFFF00; color: #000; border: 2px solid #FFFF00; }
+body.high-contrast strong { color: #FFFF00; }
+
+/* Tooltip do glossário: fundo amarelo exige texto preto para contraste máximo */
+body.high-contrast .glossario::after {
+  background: #FFFF00;
+  color: #000;
+  box-shadow: 0 0 0 2px #000;
+}
+
+/* Label "Engenharia Cognitiva" no slider: fundo amarelo com texto preto */
+body.high-contrast .split-label-cognitiva {
+  background: #FFFF00;
+  color: #000;
+}
+
+/* "Saída: Arquitetura SPA Acessível" na dobra 3: texto escuro sobre fundo amarelo */
+body.high-contrast .flow-step-out {
+  background: #FFFF00;
+  color: #000;
+}
+
+/* box-destaque label legível */
+body.high-contrast .box-destaque .box-label { color: #FFFF00; }
+
+/* "Auditoria Pedagógica e Conformidade" — hero-badge tem fundo var(--ocre)=#FFFF00
+   no alto contraste. Texto precisa ser preto para ser legível. */
+body.high-contrast .hero-badge { color: #000; background: #FFFF00; }
+
+/* "O Rigor do Sucesso na Aprendizagem" — o <em> tem cor hardcoded rgba(2,37,61,0.6)
+   que some no fundo preto. Forçar branco. */
+body.high-contrast .filter-headline em { color: #FFF; }
+
+/* "Entrada: Conteúdo Bruto / PDF" — flow-step-in usa bg-section-alt (#000 no HC)
+   e cor rgba(2,37,61,0.6) que é invisível no preto. Forçar borda+texto amarelos. */
+body.high-contrast .flow-step-in {
+  background: #000;
+  border: 2px dashed #FFFF00;
+  color: #FFFF00;
+}
+
+/* Texto da camada direita do slider (disciplina adaptada) — cinza ilegível no preto.
+   Forçar branco e fundo preto. */
+body.high-contrast .split-layer-cognitiva {
+  background: #000;
+}
+body.high-contrast .split-layer-cognitiva p,
+body.high-contrast .split-layer-cognitiva li,
+body.high-contrast .split-layer-cognitiva h4 { color: #FFF; }
+body.high-contrast .split-mini-box { background: #000; border-left-color: #FFFF00; color: #FFF; }
+body.high-contrast .split-mini-box strong { color: #FFFF00; }
+
+/* DYSLEXIC MODE */
+body.dyslexic-mode,
+body.dyslexic-mode h1,
+body.dyslexic-mode h2,
+body.dyslexic-mode h3,
+body.dyslexic-mode h4,
+body.dyslexic-mode p,
+body.dyslexic-mode li,
+body.dyslexic-mode span {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+}
+body.dyslexic-mode { letter-spacing: 0.12em; line-height: 1.9; }
+
+/* MODO FOCO (TDAH) — removido: o escopo era restrito à unidade demonstrativa,
+   o que criava uma experiência inconsistente com o resto da página.
+   O toggle foi mantido no painel mas sem efeito visual para não confundir. */
+
+/* ============================================================
+   AVA COMPATIBILITY BAR
+   Barra discreta de compatibilidade com plataformas AVA
+============================================================ */
+.ava-compat-bar {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+.ava-compat-label {
+  font-family: var(--font-syndra);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.ava-compat-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+.ava-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.9rem;
+  border: 1px solid var(--borda-suave);
+  border-radius: 999px;
+  font-family: var(--font-syndra);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+.ava-chip i { font-size: 0.75rem; color: var(--ocre); }
+.ava-chip:hover {
+  border-color: var(--ocre);
+  color: var(--marinho);
+  background: var(--ocre-soft);
+}
+.ava-chip-highlight {
+  border-color: rgba(224, 181, 101, 0.45);
+  color: var(--marinho);
+  background: var(--ocre-soft);
+  font-style: italic;
+}
+.ava-compat-caption {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 56ch;
+  margin: 0;
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* ============================================================
+   BOTÃO VOLTAR AO TOPO
+   Posicionado acima do FAB de acessibilidade
+============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 6.5rem;   /* empilhado acima do .a11y-fab (1.5rem + 58px ≈ 5.1rem) */
+  right: 1.5rem;
+  z-index: 300;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  color: var(--marinho);
+  border: 1.5px solid var(--borda-suave);
+  box-shadow: 0 4px 16px rgba(2, 37, 61, 0.12);
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  transition: transform var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition);
+  opacity: 0;
+  pointer-events: none;
+}
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.back-to-top:hover {
+  background: var(--ocre-soft);
+  border-color: var(--ocre);
+  transform: translateY(-3px);
+}
+/* Dark mode overrides */
+body.dark-mode .back-to-top { background: #1F2227; border-color: rgba(126,184,212,0.2); color: #D6E4ED; }
+body.dark-mode .ava-chip { background: #1F2227; border-color: rgba(214,228,237,0.1); }
+body.dark-mode .ava-chip:hover { background: rgba(224,181,101,0.1); }
+body.dark-mode .ava-chip-highlight { background: rgba(224,181,101,0.1); }
+/* High contrast overrides */
+body.high-contrast .back-to-top { background: #000; border: 2px solid #FFFF00; color: #FFFF00; }
+body.high-contrast .ava-chip { background: #000; border-color: #FFFF00; color: #FFFF00; }
+body.high-contrast .ava-chip-highlight { background: #000; border-color: #FFFF00; color: #FFFF00; }
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .back-to-top { bottom: 5.5rem; right: 1rem; width: 40px; height: 40px; }
+}
+
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+.section-divider {
+  width: 64px; height: 3px;
+  background: var(--ocre);
+  margin: 1.25rem auto 0;
+  border-radius: 2px;
+}
+
+/* Animação de entrada via IntersectionObserver */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   RESPONSIVIDADE FINA
+============================================================ */
+@media (max-width: 480px) {
+  .a11y-fab { bottom: 1rem; right: 1rem; width: 52px; height: 52px; }
+  .a11y-panel { bottom: 4.5rem; right: 1rem; left: 1rem; width: auto; max-width: none; }
+  .split-handle { width: 42px; height: 42px; font-size: 0.9rem; }
+  .counter-widget { width: 260px; height: 260px; }
+  .counter-number { font-size: 3.8rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
 </head>
+
+<!-- ============================================================
+     BODY — classe technical-grid ativa o padrão de pontos de fundo
+============================================================ -->
 <body class="technical-grid">
 
-    <div id="progress-bar"></div>
+<!-- ============================================================
+     BARRA DE PROGRESSO — progresso de scroll no topo da página
+============================================================ -->
+<div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progresso de leitura"></div>
 
-    <header class="glass-header py-4 px-6 lg:py-5 lg:px-24">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div id="header-logo" class="font-syndra text-xl lg:text-2xl font-black tracking-tighter text-[#02253D]">
-                COGNITIVA
-            </div>
-            <nav id="header-nav">
-                <button onclick="toggleModal(true)" class="bg-[#02253D] text-white font-syndra text-[9px] lg:text-[10px] px-5 py-3 lg:px-8 lg:py-3 rounded-sm uppercase tracking-widest hover:brightness-125 transition-all">
-                    Filie sua Instituição
-                </button>
-            </nav>
-        </div>
-    </header>
+<!-- ============================================================
+     HEADER GLOBAL — Glassmorphism + navegação
+============================================================ -->
+<header class="glass-header" role="banner">
+  <div class="header-inner">
+    <!-- Logotipo institucional -->
+    <a href="#dobra-hero" class="logo-text" aria-label="Cognitiva — Início">
+      COGNITIVA<span>.</span>
+    </a>
+    <!-- CTA principal -->
+    <button class="btn-header" onclick="toggleModal(true)" aria-haspopup="dialog">
+      Filie sua Instituição
+    </button>
+  </div>
+</header>
 
-    <div id="agendamento-modal" class="fixed inset-0 z-[20000] hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
-        <div class="bg-white max-w-2xl w-full p-8 lg:p-16 relative rounded-sm shadow-2xl overflow-y-auto max-h-[90vh]">
-            <button onclick="toggleModal(false)" class="absolute top-4 right-4 lg:top-6 lg:right-6 text-[#02253D] hover:text-[#E0B565]">
-                <i class="fa-solid fa-xmark text-3xl"></i>
-            </button>
-            <div class="text-center mb-8 lg:mb-10 mt-4 lg:mt-0">
-                <h3 class="font-syndra text-xl lg:text-2xl text-[#02253D] font-black uppercase tracking-widest leading-tight">Solicitar Consultoria Estratégica</h3>
-                <p class="text-[#3E424B] text-sm mt-4">Preencha os dados para análise técnica de acessibilidade.</p>
-            </div>
-            
-            <form action="https://formsubmit.co/cognitiva@cognitivaead.com.br" method="POST" class="space-y-4 lg:space-y-6">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="Novo Lead Cognitiva - Agendamento SPA">
-                
-                <div class="space-y-1">
-                    <label class="text-[10px] font-bold uppercase tracking-widest text-[#02253D]">Nome do Gestor</label>
-                    <input type="text" name="nome" required class="modal-input" placeholder="Ex: Dr. Alberto Silva">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] font-bold uppercase tracking-widest text-[#02253D]">Cargo</label>
-                    <input type="text" name="cargo" required class="modal-input" placeholder="Ex: Reitor / Pró-Reitor">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] font-bold uppercase tracking-widest text-[#02253D]">E-mail Institucional</label>
-                    <input type="email" name="email" required class="modal-input" placeholder="gestao@ies.edu.br">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] font-bold uppercase tracking-widest text-[#02253D]">Nome da IES</label>
-                    <input type="text" name="ies" required class="modal-input" placeholder="Ex: Universidade Cognitiva">
-                </div>
-                <button type="submit" class="w-full bg-[#02253D] text-white font-syndra py-5 lg:py-6 text-sm lg:text-lg tracking-[0.1em] lg:tracking-[0.2em] hover:brightness-125 transition-all uppercase mt-4">Confirmar Solicitação</button>
-            </form>
-            
+<!-- ============================================================
+     MAIN — Todas as dobras em rolagem contínua (SPA)
+============================================================ -->
+<main id="main-content">
+
+  <!-- ==========================================
+       DOBRA 1 — HERO
+       Contador TEA + proposta de valor
+  =========================================== -->
+  <section id="dobra-hero" aria-labelledby="hero-title">
+    <div class="hero-grid">
+
+      <!-- Coluna de texto -->
+      <div>
+        <div class="hero-badge">Auditoria Pedagógica e Conformidade</div>
+        <h1 id="hero-title" class="hero-title">
+          Sua Instituição está preparada para os 918.877 alunos neurodivergentes?
+        </h1>
+        <p class="hero-sub">
+          Engenharia de Transposição Didática focada no fortalecimento de indicadores de acessibilidade para IES que não podem esperar.
+        </p>
+        <button class="btn-hero" onclick="toggleModal(true)" aria-haspopup="dialog">
+          Filie sua Instituição
+        </button>
+      </div>
+
+      <!-- Widget contador TEA -->
+      <div class="counter-widget" aria-label="Crescimento TEA">
+        <div class="counter-ring" aria-hidden="true"></div>
+        <div class="counter-inner">
+          <span class="counter-number" aria-live="polite">
+            +<span id="counter-tea">0</span>%
+          </span>
+          <span class="counter-label">Crescimento TEA</span>
         </div>
+      </div>
+
     </div>
+  </section><!-- /dobra-hero -->
 
-    <main id="view-home" class="pt-24">
-        
-        <section class="min-h-[90vh] flex items-center py-16 lg:py-20 px-6 lg:px-24">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-center">
-                <div class="space-y-8 lg:space-y-10 text-center lg:text-left">
-                    <div class="inline-block bg-[#E0B565] px-5 py-2 rounded-md"><span class="text-[#02253D] font-bold text-[10px] lg:text-xs tracking-widest uppercase">Auditoria Pedagógica e Conformidade</span></div>
-                    <h1 class="font-syndra text-3xl md:text-4xl lg:text-6xl text-[#02253D] leading-[1.2] lg:leading-[1.1] font-extrabold">Sua Instituição está preparada para os 918.877 alunos neurodivergentes?</h1>
-                    <p class="text-lg lg:text-2xl text-[#3E424B] leading-relaxed max-w-2xl font-light mx-auto lg:mx-0">Engenharia de Transposição Didática focada no fortalecimento de indicadores de acessibilidade.</p>
-                    <button onclick="toggleModal(true)" class="w-full lg:w-auto bg-[#02253D] text-white font-syndra py-5 px-6 lg:py-6 lg:px-12 rounded-sm uppercase text-sm lg:text-base tracking-[0.1em] lg:tracking-[0.2em] hover:brightness-125 transition-all shadow-2xl">Filie sua Instituição</button>
-                </div>
-                <div class="relative flex justify-center lg:justify-end lg:pr-12">
-                    <div class="relative w-72 h-72 lg:w-[420px] lg:h-[420px] border-2 border-[#3E424B]/5 rounded-full flex items-center justify-center p-10 bg-white/60 backdrop-blur-sm shadow-2xl">
-                        <div class="absolute inset-0 border-t-2 border-[#E0B565]/30 rotate-45 rounded-full"></div>
-                        <div class="text-center z-10">
-                            <span class="block font-syndra text-6xl lg:text-8xl text-[#02253D] font-black leading-none mb-4 lg:mb-6">+<span id="counter-tea">0</span>%</span>
-                            <p class="text-[#3E424B] font-bold uppercase tracking-[0.2em] lg:tracking-[0.4em] text-[10px] lg:text-sm border-t border-[#E0B565] pt-4 lg:pt-8 inline-block">Crescimento TEA</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="bg-[#02253D] py-24 lg:py-32 px-6 lg:px-24 text-white text-center">
-            <h2 class="font-syndra text-2xl lg:text-5xl text-[#E0B565] mb-16 lg:mb-24 font-bold tracking-tight leading-tight">Os Gargalos Invisíveis da Retenção Acadêmica</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-                <div class="p-10 lg:p-12 border border-[#E0B565]/30 rounded-sm space-y-6 hover:bg-[#E0B565]/5 transition-all text-center">
-                    <i class="fa-solid fa-file-circle-exclamation text-[#E0B565] text-5xl mx-auto block"></i>
-                    <h3 class="font-syndra text-[#E0B565] text-xl font-bold uppercase">O Limbo do PDF</h3>
-                    <p class="text-base lg:text-lg opacity-80 leading-relaxed">Materiais estáticos e não adaptados são o principal vetor de evasão e apontamentos negativos em auditorias.</p>
-                </div>
-                <div class="p-10 lg:p-12 border border-[#E0B565]/30 rounded-sm space-y-6 hover:bg-[#E0B565]/5 transition-all text-center">
-                    <i class="fa-solid fa-brain text-[#E0B565] text-5xl mx-auto block"></i>
-                    <h3 class="font-syndra text-[#E0B565] text-xl font-bold uppercase">Exaustão Cognitiva</h3>
-                    <p class="text-base lg:text-lg opacity-80 leading-relaxed">Interfaces densas e fluxos lineares impedem que o aluno neurodivergente processe o conteúdo acadêmico.</p>
-                </div>
-                <div class="p-10 lg:p-12 border border-[#E0B565]/30 rounded-sm space-y-6 hover:bg-[#E0B565]/5 transition-all text-center">
-                    <i class="fa-solid fa-shield-halved text-[#E0B565] text-5xl mx-auto block"></i>
-                    <h3 class="font-syndra text-[#E0B565] text-xl font-bold uppercase">Vulnerabilidade</h3>
-                    <p class="text-base lg:text-lg opacity-80 leading-relaxed">A ausência de transposição didática auditada e acessível fragiliza os indicadores de acessibilidade exigidos pelo MEC.</p>
-                </div>
-            </div>
-        </section>
+  <!-- ==========================================
+       DOBRA 2 — RISK MAP
+       Os três gargalos da retenção acadêmica
+  =========================================== -->
+  <section id="dobra-risk" aria-labelledby="risk-title">
+    <div class="container">
+      <h2 id="risk-title" class="risk-title fade-up">
+        Os Gargalos Invisíveis da Retenção Acadêmica
+      </h2>
+      <div class="risk-grid">
 
-        <section class="bg-[#F9F9F9] py-24 lg:py-32 px-6 lg:px-24">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                <div class="space-y-8 lg:space-y-10 text-center lg:text-left">
-                    <h2 class="font-syndra text-3xl lg:text-5xl text-[#02253D] font-bold leading-tight">TRANSPOSIÇÃO AUDITADA: <br><span class="text-[#02253D]/70 font-light italic">O Rigor do Sucesso na Aprendizagem</span></h2>
-                    <p class="text-lg lg:text-xl text-[#3E424B] leading-relaxed">Cada material é validado por nossa equipe de Sucesso na Aprendizagem, composta por psicopedagogos especialistas. Transformamos o saber bruto em blocos lógicos assimiláveis, removendo barreiras de leitura sem sacrificar o rigor acadêmico.</p>
-                    <div class="pt-6 border-t-4 lg:border-t-0 lg:border-l-4 border-[#E0B565] pt-6 lg:pt-0 lg:pl-8 text-left">
-                        <p class="text-[#3E424B] font-bold text-base lg:text-lg uppercase tracking-widest text-center lg:text-left">Apoio estratégico para o alcance de indicadores de excelência.</p>
-                    </div>
-                </div>
-                <div class="bg-white p-10 lg:p-16 rounded-lg shadow-2xl border border-gray-100 flex flex-col items-center space-y-8 text-center relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-2 lg:w-2 lg:h-full bg-[#E0B565]"></div>
-                    <div class="w-full p-4 lg:p-5 border border-gray-200 rounded-md bg-[#F9F9F9] font-bold uppercase text-[9px] lg:text-[10px] tracking-[0.2em] opacity-60">Entrada: Conteúdo Bruto / PDF</div>
-                    <i class="fa-solid fa-chevron-down text-[#E0B565] text-2xl animate-bounce"></i>
-                    <div class="w-full p-6 lg:p-8 border-2 border-[#E0B565] rounded-md font-syndra font-bold text-[#02253D] text-base lg:text-lg bg-[#E0B565]/5">Validação Psicopedagógica Humana</div>
-                    <i class="fa-solid fa-chevron-down text-[#E0B565] text-2xl animate-bounce"></i>
-                    <div class="w-full p-4 lg:p-5 bg-[#02253D] text-white rounded-md font-syndra font-bold uppercase text-[10px] lg:text-xs tracking-[0.2em] lg:tracking-[0.4em]">Saída: Arquitetura SPA Acessível</div>
-                </div>
-            </div>
-        </section>
+        <!-- Card 1 -->
+        <article class="risk-card fade-up" style="transition-delay:0.1s">
+          <i class="fa-solid fa-file-circle-exclamation" aria-hidden="true"></i>
+          <h3>O Limbo do PDF</h3>
+          <p>Materiais estáticos e não adaptados são o principal vetor de evasão e de apontamentos negativos em auditorias do MEC.</p>
+        </article>
 
-        <section id="experiencia-spa" class="bg-[#F9F9F9] py-24 lg:py-32 px-6 lg:px-24 text-center overflow-hidden border-t border-gray-200">
-            <div class="max-w-7xl mx-auto">
-                <h2 class="font-syndra text-3xl lg:text-5xl text-[#02253D] mb-16 lg:mb-20 font-bold leading-tight">Engenharia de Conteúdo na Prática</h2>
-                <div class="relative flex flex-col lg:flex-row justify-center items-center min-h-auto lg:min-h-[650px] gap-6 lg:gap-0">
-                    
-                    <div class="w-full max-w-[800px] hidden lg:block bg-white rounded-2xl shadow-2xl border border-gray-100 p-16 text-left filter blur-[4px] opacity-50 select-none">
-                        <h3 class="font-syndra text-3xl text-[#02253D] mb-8">DIRETRIZES ACADÊMICAS</h3>
-                        <p class="font-semibold text-[#02253D] text-lg leading-loose mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="grid grid-cols-2 gap-8"><div class="h-40 bg-[#02253D]/10 rounded-lg"></div><div class="h-40 bg-[#E0B565]/10 rounded-lg"></div></div>
-                    </div>
-                    
-                    <div class="extract-box box-1 lg:top-[-40px] lg:left-[-100px]" style="animation-delay: 0.2s;">
-                        <h4 class="font-syndra font-black text-lg lg:text-xl mb-3 lg:mb-4">Navegação Preditiva</h4>
-                        <p class="text-sm lg:text-base text-[#3E424B]">Elimina a ansiedade do tempo de espera com carregamento via SPA, mantendo o foco absoluto do aluno.</p>
-                    </div>
-                    <div class="extract-box box-2 lg:top-[45%] lg:right-[-100px] lg:translate-y-[-50%]" style="animation-delay: 0.6s;">
-                        <h4 class="font-syndra font-black text-lg lg:text-xl mb-3 lg:mb-4">Born Accessible</h4>
-                        <p class="text-sm lg:text-base text-[#3E424B]">Estrutura de código preparada nativamente para leitores de tela e comandos de voz nativos.</p>
-                    </div>
-                    <div class="extract-box box-3 lg:bottom-[-40px] lg:left-[5%]" style="animation-delay: 1.1s;">
-                        <h4 class="font-syndra font-black text-lg lg:text-xl mb-3 lg:mb-4">Arquitetura Lógica</h4>
-                        <p class="text-sm lg:text-base text-[#3E424B]">Conteúdo fragmentado em micro-objetivos de aprendizagem para evitar a sobrecarga mental do aluno.</p>
-                    </div>
-                </div>
-                <div class="mt-16 lg:mt-24">
-                    <button onclick="switchView('demo')" class="w-full lg:w-auto px-6 py-5 lg:px-16 lg:py-7 border-2 border-[#02253D] text-[#02253D] font-syndra font-extrabold text-sm lg:text-base uppercase tracking-[0.1em] lg:tracking-[0.3em] hover:bg-[#02253D] hover:text-white transition-all shadow-xl">Ver Demonstração Técnica</button>
-                </div>
-            </div>
-        </section>
+        <!-- Card 2 -->
+        <article class="risk-card fade-up" style="transition-delay:0.22s">
+          <i class="fa-solid fa-brain" aria-hidden="true"></i>
+          <h3>Exaustão Cognitiva</h3>
+          <p>Interfaces densas e fluxos lineares impedem que o aluno neurodivergente processe o conteúdo acadêmico com eficiência.</p>
+        </article>
 
-        <section id="amparo-cientifico" class="bg-[#F0F2F5] py-24 lg:py-32 px-6 lg:px-24 border-t border-gray-200">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16 lg:mb-20">
-                    <h2 class="font-syndra text-3xl lg:text-5xl text-[#02253D] font-black uppercase tracking-tight leading-tight">Engenharia com Amparo Técnico e Científico</h2>
-                    <div class="w-16 lg:w-24 h-1 bg-[#E0B565] mx-auto mt-6"></div>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-                    <div class="bg-white p-8 lg:p-10 rounded-sm shadow-sm border-t-4 border-[#02253D] space-y-6">
-                        <h3 class="font-syndra text-[#02253D] text-lg lg:text-xl font-bold uppercase tracking-wider">Conformidade Regulatória</h3>
-                        <ul class="space-y-4 text-sm lg:text-base text-[#3E424B] leading-relaxed">
-                            <li class="flex gap-3"><i class="fa-solid fa-calendar-check text-[#E0B565] mt-1"></i><span>As IES têm até maio de 2027 para a adequação integral aos novos padrões de acessibilidade e qualidade.</span></li>
-                            <li class="flex gap-3"><i class="fa-solid fa-check-double text-[#E0B565] mt-1"></i><span>Asseguramos que o acervo adaptado para neurodivergentes cumpra os critérios técnicos do MEC.</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-8 lg:p-10 rounded-sm shadow-sm border-t-4 border-[#E0B565] space-y-6">
-                        <h3 class="font-syndra text-[#02253D] text-lg lg:text-xl font-bold uppercase tracking-wider">Retenção e Ciência</h3>
-                        <ul class="space-y-4 text-sm lg:text-base text-[#3E424B] leading-relaxed">
-                            <li class="flex gap-3"><i class="fa-solid fa-graduation-cap text-[#E0B565] mt-1"></i><span>Estudos baseados no UDL apontam que a flexibilidade de conteúdo é chave para a permanência de alunos atípicos.</span></li>
-                            <li class="flex gap-3"><i class="fa-solid fa-microscope text-[#E0B565] mt-1"></i><span>A fragmentação em blocos lógicos é cientificamente reconhecida por mitigar a exaustão mental.</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-8 lg:p-10 rounded-sm shadow-sm border-t-4 border-[#02253D] space-y-6">
-                        <h3 class="font-syndra text-[#02253D] text-lg lg:text-xl font-bold uppercase tracking-wider">Integridade Técnica</h3>
-                        <ul class="space-y-4 text-sm lg:text-base text-[#3E424B] leading-relaxed">
-                            <li class="flex gap-3"><i class="fa-solid fa-code text-[#E0B565] mt-1"></i><span>Arquitetura SPA seguindo diretrizes WCAG e parâmetros de legibilidade do padrão UnB.</span></li>
-                            <li class="flex gap-3"><i class="fa-solid fa-eye text-[#E0B565] mt-1"></i><span>Suporte nativo a OCR, garantindo autonomia para usuários de leitores de tela como NVDA.</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Card 3 -->
+        <article class="risk-card fade-up" style="transition-delay:0.34s">
+          <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+          <h3>Vulnerabilidade Regulatória</h3>
+          <p>A ausência de transposição didática auditada fragiliza os indicadores de acessibilidade exigidos pelos órgãos de controle.</p>
+        </article>
 
-        <section class="bg-[#02253D] py-24 lg:py-32 px-6 lg:px-24 text-white text-center">
-            <div class="max-w-5xl mx-auto space-y-12 lg:space-y-16">
-                <h2 class="font-syndra text-3xl lg:text-6xl text-[#E0B565] font-bold tracking-tight leading-tight">Do Conteúdo ao Ativo Estratégico</h2>
-                <p class="text-lg lg:text-2xl leading-relaxed font-light opacity-90">A Cognitiva entrega ativos proprietários amparados por blindagem documental para auditorias governamentais.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 pt-8 lg:pt-12">
-                    <div class="space-y-4 lg:space-y-6 group">
-                        <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 lg:mb-8 border border-white/10 group-hover:border-[#E0B565]/50 transition-all"><i class="fa-solid fa-lock text-[#E0B565] text-2xl lg:text-4xl"></i></div>
-                        <h4 class="font-syndra font-bold text-xl lg:text-2xl uppercase tracking-widest text-[#E0B565]">Propriedade Intelectual</h4>
-                        <p class="text-base lg:text-lg text-white/70 leading-relaxed">Criação de acervos digitais exclusivos que valorizam o patrimônio acadêmico da sua instituição.</p>
-                    </div>
-                    <div class="space-y-4 lg:space-y-6 group">
-                        <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 lg:mb-8 border border-white/10 group-hover:border-[#E0B565]/50 transition-all"><i class="fa-solid fa-file-signature text-[#E0B565] text-2xl lg:text-4xl"></i></div>
-                        <h4 class="font-syndra font-bold text-xl lg:text-2xl uppercase tracking-widest text-[#E0B565]">Suporte Regulatório</h4>
-                        <p class="text-base lg:text-lg text-white/70 leading-relaxed">Documentação técnica detalhada que subsidia a defesa de indicadores de acessibilidade.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      </div>
+    </div>
+  </section><!-- /dobra-risk -->
 
-        <section id="filiacao" class="bg-gradient-to-b from-[#F9F9F9] to-gray-200 py-24 lg:py-32 px-6 lg:px-24 text-center border-t border-gray-300">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="font-syndra text-3xl md:text-4xl lg:text-6xl text-[#02253D] font-black uppercase mb-10 lg:mb-12 tracking-tight lg:tracking-tighter leading-tight">Fortaleça a Gestão do seu Acervo Acadêmico</h2>
-                <button onclick="toggleModal(true)" class="w-full lg:w-auto bg-[#02253D] text-white font-syndra py-5 px-4 lg:py-7 lg:px-16 text-sm md:text-base lg:text-2xl tracking-[0.1em] lg:tracking-[0.3em] hover:brightness-125 transition-all shadow-2xl uppercase">Solicitar Análise de Conformidade</button>
-                <footer class="pt-24 lg:pt-32 opacity-70 text-[9px] lg:text-[11px] uppercase tracking-[0.2em] lg:tracking-[0.4em] leading-loose max-w-4xl mx-auto">
-                    COGNITIVA &reg; 2026 | ENGENHARIA DE TRANSPOSIÇÃO DIDÁTICA
-                    <p class="mt-4 lg:mt-6 font-bold text-[#02253D] leading-relaxed">A Cognitiva atua como parceira técnica para melhoria de indicadores pedagógicos. Nossos processos visam mitigar riscos regulatórios e fortalecer a conformidade de acessibilidade.</p>
-                </footer>
-            </div>
-        </section>
-    </main>
 
-    <main id="view-demo" class="hidden">
-        <div class="demo-ambient-light">
-            <section class="min-h-screen flex flex-col justify-center py-16 lg:py-20 px-6 lg:px-24 pt-24 lg:pt-32">
-                <div class="max-w-6xl mx-auto text-center space-y-12 lg:space-y-16 w-full">
-                    <h1 class="font-syndra text-3xl md:text-4xl lg:text-7xl text-[#E0B565] font-extrabold leading-tight headline-shadow">A Evolução do Conteúdo em 60 Segundos</h1>
-                    
-                    <div class="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(224,181,101,0.15)] lg:shadow-[0_0_80px_rgba(224,181,101,0.15)] border border-[#E0B565]/30 w-full max-w-5xl mx-auto">
-                        <iframe 
-                            width="100%" 
-                            height="100%" 
-                            src="https://www.youtube.com/embed/ji1OG8EeGfk" 
-                            title="Cognitiva | Showcase de Ativos" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen
-                            class="absolute inset-0 w-full h-full"
-                        ></iframe>
-                    </div>
+  <!-- ==========================================
+       DOBRA 3 — HUMAN FILTER
+       Fluxo visual da validação psicopedagógica
+  =========================================== -->
+  <section id="dobra-filter" aria-labelledby="filter-title">
+    <div class="container">
+      <div class="filter-grid">
 
-                </div>
-            </section>
+        <!-- Texto explicativo -->
+        <div>
+          <h2 id="filter-title" class="filter-headline fade-up">
+            TRANSPOSIÇÃO AUDITADA:<br>
+            <em>O Rigor do Sucesso na Aprendizagem</em>
+          </h2>
+          <p class="filter-body fade-up">
+            Cada material é validado por nossa equipe de Sucesso na Aprendizagem, composta por psicopedagogos especialistas. Transformamos o saber bruto em blocos lógicos assimiláveis, removendo barreiras de leitura sem sacrificar o rigor acadêmico.
+          </p>
+          <div class="filter-quote fade-up">
+            Apoio estratégico para o alcance de indicadores de excelência educacional.
+          </div>
         </div>
-        <section class="bg-white py-24 lg:py-40 px-6 lg:px-24 text-center border-t">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="font-syndra text-3xl md:text-4xl lg:text-5xl text-[#02253D] font-black mb-10 lg:mb-12 leading-tight">Sua instituição não precisa de outro PDF, <br><span class="text-[#E0B565] italic">ela precisa de uma estratégia de Acervo.</span></h2>
-                <button onclick="toggleModal(true)" class="w-full lg:w-auto bg-[#02253D] text-white font-syndra py-5 px-4 lg:py-8 lg:px-16 text-sm md:text-base lg:text-2xl tracking-[0.1em] lg:tracking-[0.3em] hover:brightness-125 transition-all shadow-xl uppercase">Agendar Consultoria Estratégica</button>
-                <footer class="mt-24 lg:mt-32 pt-12 lg:pt-16 border-t border-gray-100 opacity-60 text-[9px] lg:text-[11px] uppercase tracking-[0.2em] lg:tracking-[0.4em] font-bold">COGNITIVA &reg; 2026 | ENGENHARIA DE TRANSPOSIÇÃO DIDÁTICA</footer>
+
+        <!-- Caixa de fluxo visual -->
+        <div class="flow-box fade-up">
+          <div class="flow-step flow-step-in">
+            <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>&nbsp;&nbsp;Entrada: Conteúdo Bruto / PDF
+          </div>
+          <div class="flow-arrow" aria-hidden="true">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="flow-step flow-step-mid">
+            <i class="fa-solid fa-user-doctor" aria-hidden="true"></i>&nbsp;&nbsp;Validação Psicopedagógica Humana
+          </div>
+          <div class="flow-arrow" aria-hidden="true">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="flow-step flow-step-out">
+            <i class="fa-solid fa-rocket" aria-hidden="true"></i>&nbsp;&nbsp;Saída: Arquitetura SPA Acessível
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- /dobra-filter -->
+
+
+  <!-- ==========================================
+       DOBRA 4 — SHOWCASE DE ATIVO (VÍDEO)
+       Iframe YouTube centralizado
+  =========================================== -->
+  <section id="dobra-video" aria-labelledby="video-title">
+    <div class="container">
+      <span class="video-eyebrow fade-up">Demonstração Técnica</span>
+      <h2 id="video-title" class="video-title fade-up">Showcase de Ativo</h2>
+      <p class="video-sub fade-up">
+        Veja em 60 segundos como a Engenharia de Transposição Didática da Cognitiva transforma conteúdo denso em ativos estratégicos acessíveis.
+      </p>
+      <!-- Wrapper responsivo 16:9 -->
+      <div class="video-frame-wrapper fade-up">
+        <iframe
+          src="https://www.youtube.com/embed/ji1OG8EeGfk?rel=0&modestbranding=1"
+          title="Cognitiva | Showcase de Ativo — Engenharia de Transposição Didática"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section><!-- /dobra-video -->
+
+
+  <!-- ==========================================
+       DOBRA 5 — A DIFERENÇA TÁTIL (SPLIT-SCREEN)
+       Slider interativo Antes/Depois
+  =========================================== -->
+  <section id="dobra-split" aria-labelledby="split-title">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2 id="split-title">A Diferença Tátil. Arraste e Compare.</h2>
+        <p>Do mesmo conteúdo bruto, duas experiências cognitivas radicalmente distintas.</p>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+
+      <!-- Container do slider (mouse + touch + teclado) -->
+      <div
+        class="split-container fade-up"
+        id="splitContainer"
+        role="region"
+        aria-label="Comparação interativa: documento estático versus engenharia cognitiva"
+      >
+        <!-- Camada A — Documento estático (fundo) -->
+        <div class="split-layer split-layer-static" aria-hidden="true">
+          <span class="split-label split-label-static">Arquivo Estático</span>
+          <h4>UNIDADE III — TEORIA GERAL DOS SISTEMAS APLICADA À EDUCAÇÃO SUPERIOR</h4>
+          <p>A teoria geral dos sistemas, desenvolvida originalmente por Ludwig von Bertalanffy na década de 1940 e posteriormente expandida por diversos autores, constitui-se enquanto um arcabouço epistemológico de inegável relevância para a compreensão dos fenômenos educacionais contemporâneos, outrossim, no que tange à articulação entre os subsistemas pedagógico, administrativo e tecnológico.</p>
+          <p>Cumpre observar, deveras, que a aplicabilidade do referido paradigma sistêmico ao contexto da educação superior demanda, por parte do gestor educacional, a internalização de pressupostos teórico-metodológicos que perpassam tanto a noção de homeostase quanto a de retroalimentação, conceitos estes que, conquanto aparentem certa hermeticidade terminológica, revelam-se operacionalmente imprescindíveis para a tomada de decisões estratégicas.</p>
+          <p>Outrossim, faz-se mister salientar que a referida abordagem sistêmica, ao postular a interdependência funcional entre as partes constituintes da organização educacional, oferece ao gestor instrumentos analíticos para a identificação de pontos de fragilidade institucional, sobretudo no que concerne aos índices de evasão discente, os quais, segundo dados consolidados pelo INEP, têm-se mantido em patamares preocupantes...</p>
+        </div>
+
+        <!-- Camada B — Engenharia Cognitiva Cognitiva (sobreposta) -->
+        <div class="split-layer split-layer-cognitiva" id="splitCognitiva">
+          <span class="split-label split-label-cognitiva">Engenharia Cognitiva</span>
+          <h4>Teoria dos Sistemas na Educação Superior</h4>
+          <p>A <strong>Teoria Geral dos Sistemas</strong>, de Ludwig von Bertalanffy (1940), oferece uma lente poderosa para enxergar a instituição de ensino como um organismo vivo.</p>
+          <p>Três subsistemas se conectam e influenciam:</p>
+          <ul>
+            <li><strong>Pedagógico</strong> — sala de aula e currículo</li>
+            <li><strong>Administrativo</strong> — gestão e processos</li>
+            <li><strong>Tecnológico</strong> — AVA e infraestrutura</li>
+          </ul>
+          <div class="split-mini-box">
+            <strong>Ponto de Atenção</strong>
+            Quando um subsistema falha, todos os outros sentem. É por isso que <strong>retenção discente</strong> é um problema sistêmico e não apenas pedagógico.
+          </div>
+        </div>
+
+        <!-- Divisor visual + handle interativo -->
+        <div class="split-divider" id="splitDivider" aria-hidden="true"></div>
+        <div class="split-handle" id="splitHandle" aria-hidden="true">⇆</div>
+
+        <!-- Range invisível para acessibilidade via teclado -->
+        <input
+          type="range"
+          class="split-range"
+          id="splitRange"
+          min="0" max="100" value="50"
+          aria-label="Arraste para comparar o documento estático com a engenharia cognitiva"
+        />
+
+        <!-- Tooltip de convite à interação -->
+        <div class="split-tooltip" id="splitTooltip" aria-hidden="true">
+          ✋ Arraste para transpor em tempo real
+        </div>
+      </div>
+    </div>
+  </section><!-- /dobra-split -->
+
+
+  <!-- ==========================================
+       DOBRA 6 — UNIDADE DEMONSTRATIVA (SPA Viewport)
+       Conteúdo JSON injetado com scroll reveal suave
+  =========================================== -->
+  <section id="dobra-demo" aria-labelledby="demo-title">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2 id="demo-title">Unidade Demonstrativa</h2>
+        <p>Exemplo real de transposição: a disciplina é injetada abaixo sem reload de página.</p>
+        <div class="section-divider" aria-hidden="true"></div>
+        <!-- Barra de compatibilidade com AVAs -->
+        <div class="ava-compat-bar" aria-label="Compatibilidade com plataformas de aprendizagem">
+          <span class="ava-compat-label">Compatível nativamente com</span>
+          <div class="ava-compat-icons">
+            <span class="ava-chip" title="Moodle"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Moodle</span>
+            <span class="ava-chip" title="Canvas"><i class="fa-solid fa-palette" aria-hidden="true"></i> Canvas</span>
+            <span class="ava-chip" title="Blackboard"><i class="fa-solid fa-chalkboard" aria-hidden="true"></i> Blackboard</span>
+            <span class="ava-chip ava-chip-highlight" title="Integração LTI ou incorporação direta"><i class="fa-solid fa-plug" aria-hidden="true"></i> LTI &amp; Embed</span>
+          </div>
+          <p class="ava-compat-caption">Compatível nativamente com Moodle, Canvas, Blackboard e os principais AVAs via LTI ou incorporação direta.</p>
+        </div>
+      </div>
+
+      <!--
+        #render-area — Ponto de injeção do conteúdo JSON
+        Conteúdo renderizado pelo módulo Renderer via JS
+        aria-live="polite" garante anúncio acessível em leitores de tela
+      -->
+      <div
+        id="render-area"
+        role="region"
+        aria-live="polite"
+        aria-labelledby="demo-title"
+      >
+        <!-- Conteúdo dinâmico injetado via renderUnidade() -->
+      </div>
+    </div>
+  </section><!-- /dobra-demo -->
+
+
+  <!-- ==========================================
+       DOBRA 7 — AMPARO TÉCNICO E CIENTÍFICO
+       Cards de fundamentação e conformidade
+  =========================================== -->
+  <section id="dobra-amparo" aria-labelledby="amparo-title">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2 id="amparo-title">Engenharia com Amparo Técnico e Científico</h2>
+        <p>Processos validados por ciência, regulação e décadas de pesquisa em neurociência educacional.</p>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+
+      <div class="amparo-grid">
+
+        <!-- Card: Conformidade Regulatória -->
+        <article class="amparo-card fade-up" style="transition-delay:0.08s">
+          <h3>Conformidade Regulatória</h3>
+          <ul class="amparo-list">
+            <li>
+              <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+              <span>As IES têm até maio de 2027 para adequação integral aos novos padrões de acessibilidade exigidos pelo MEC e INEP.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check-double" aria-hidden="true"></i>
+              <span>Asseguramos que o acervo adaptado para neurodivergentes cumpra os critérios técnicos de auditoria governamental.</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Card: Retenção e Ciência -->
+        <article class="amparo-card fade-up" style="transition-delay:0.18s">
+          <h3>Retenção e Ciência</h3>
+          <ul class="amparo-list">
+            <li>
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              <span>Estudos baseados no UDL (Universal Design for Learning) apontam que a flexibilidade de conteúdo é chave para a permanência de alunos atípicos.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-microscope" aria-hidden="true"></i>
+              <span>A fragmentação em blocos lógicos é cientificamente reconhecida por mitigar exaustão mental e melhorar métricas de retenção.</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Card: Integridade Técnica -->
+        <article class="amparo-card fade-up" style="transition-delay:0.28s">
+          <h3>Integridade Técnica</h3>
+          <ul class="amparo-list">
+            <li>
+              <i class="fa-solid fa-code" aria-hidden="true"></i>
+              <span>Arquitetura SPA seguindo diretrizes WCAG 2.1 AA/AAA e parâmetros de legibilidade.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-eye" aria-hidden="true"></i>
+              <span>Suporte nativo a OCR, garantindo autonomia para usuários de leitores de tela como NVDA e JAWS.</span>
+            </li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section><!-- /dobra-amparo -->
+
+
+  <!-- ==========================================
+       DOBRA 8 — FOOTER DE CONVERSÃO
+       CTA final + informações legais
+  =========================================== -->
+  <section id="dobra-footer" aria-labelledby="footer-cta-title">
+    <div class="container">
+      <h2 id="footer-cta-title" class="footer-headline fade-up">
+        Fortaleça a Gestão do<br>seu Acervo Acadêmico
+      </h2>
+      <button class="btn-cta fade-up" onclick="toggleModal(true)" aria-haspopup="dialog">
+        Solicitar Análise de Conformidade
+      </button>
+      <div class="footer-legal fade-up">
+        COGNITIVA &reg; 2026 &nbsp;|&nbsp; ENGENHARIA DE TRANSPOSIÇÃO DIDÁTICA
+        <strong>
+          A Cognitiva atua como parceira técnica para melhoria de indicadores pedagógicos. Nossos processos visam mitigar riscos regulatórios e fortalecer a conformidade de acessibilidade de Instituições de Ensino Superior.
+        </strong>
+      </div>
+    </div>
+  </section><!-- /dobra-footer -->
+
+</main><!-- /main-content -->
+
+
+<!-- ============================================================
+     MODAL DE AGENDAMENTO
+     Formulário de conversão institucional
+============================================================ -->
+<div
+  id="agendamento-modal"
+  class="modal-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  aria-hidden="true"
+>
+  <div class="modal-box">
+    <!-- Botão fechar -->
+    <button
+      class="modal-close"
+      onclick="toggleModal(false)"
+      aria-label="Fechar modal"
+    >
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <!-- Cabeçalho -->
+    <h3 id="modal-title" class="modal-title">Solicitar Consultoria Estratégica</h3>
+    <p class="modal-sub">Preencha os dados para análise técnica de acessibilidade institucional.</p>
+
+    <!-- Formulário -->
+    <form novalidate onsubmit="handleFormSubmit(event)">
+      <div class="form-group">
+        <label class="form-label" for="modal-nome">Nome do Gestor</label>
+        <input type="text" id="modal-nome" class="form-input" placeholder="Ex: Dr. Alberto Silva" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-cargo">Cargo</label>
+        <input type="text" id="modal-cargo" class="form-input" placeholder="Ex: Reitor / Pró-Reitor" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-email">E-mail Institucional</label>
+        <input type="email" id="modal-email" class="form-input" placeholder="gestao@ies.edu.br" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-ies">Nome da IES</label>
+        <input type="text" id="modal-ies" class="form-input" placeholder="Ex: Universidade Cognitiva" required />
+      </div>
+      <button type="submit" class="btn-submit">Confirmar Solicitação</button>
+    </form>
+  </div>
+</div><!-- /modal -->
+
+
+<!-- ============================================================
+     PAINEL DE ACESSIBILIDADE (FAB + PANEL)
+     Motor completo integrado de Portfolio.html
+============================================================ -->
+
+<!-- Botão voltar ao topo -->
+<button
+  class="back-to-top"
+  id="backToTop"
+  aria-label="Voltar ao topo da página"
+  onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+  title="Voltar ao topo"
+>
+  <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+</button>
+
+<!-- Botão flutuante (FAB) -->
+<button
+  class="a11y-fab"
+  id="a11yFab"
+  aria-label="Abrir painel de acessibilidade"
+  aria-expanded="false"
+  aria-controls="a11yPanel"
+>
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+    <circle cx="12" cy="4" r="2"/>
+    <path d="M19 7h-5v15h-2v-7h-2v7H8V7H3V5h16v2zm-7-1c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1z"/>
+  </svg>
+</button>
+
+<!-- Painel de opções -->
+<aside
+  class="a11y-panel"
+  id="a11yPanel"
+  role="dialog"
+  aria-labelledby="a11yPanelTitle"
+  aria-hidden="true"
+>
+  <h3 id="a11yPanelTitle">Conforto Visual</h3>
+  <p class="panel-sub">Personalize sua leitura. Preferências salvas automaticamente.</p>
+
+  <!-- Modos exclusivos (dark / sepia / alto contraste) -->
+  <div class="a11y-row">
+    <label class="a11y-row-label" for="toggle-dark">
+      Modo Noturno
+      <span class="a11y-row-desc">Fundo escuro, sem preto puro</span>
+    </label>
+    <button type="button" id="toggle-dark" class="toggle"
+      role="switch" aria-checked="false"
+      data-mode="dark-mode" data-exclusive="true">
+    </button>
+  </div>
+
+  <div class="a11y-row">
+    <label class="a11y-row-label" for="toggle-sepia">
+      Modo Sépia
+      <span class="a11y-row-desc">Tom creme, ideal para leituras longas</span>
+    </label>
+    <button type="button" id="toggle-sepia" class="toggle"
+      role="switch" aria-checked="false"
+      data-mode="sepia-mode" data-exclusive="true">
+    </button>
+  </div>
+
+  <div class="a11y-row">
+    <label class="a11y-row-label" for="toggle-contrast">
+      Alto Contraste
+      <span class="a11y-row-desc">WCAG AAA — preto e amarelo</span>
+    </label>
+    <button type="button" id="toggle-contrast" class="toggle"
+      role="switch" aria-checked="false"
+      data-mode="high-contrast" data-exclusive="true">
+    </button>
+  </div>
+
+  <!-- Modos independentes -->
+  <div class="a11y-row">
+    <label class="a11y-row-label" for="toggle-dyslexia">
+      Fonte para Dislexia
+      <span class="a11y-row-desc">OpenDyslexic + espaçamento ampliado</span>
+    </label>
+    <button type="button" id="toggle-dyslexia" class="toggle"
+      role="switch" aria-checked="false"
+      data-mode="dyslexic-mode">
+    </button>
+  </div>
+
+  <button type="button" class="panel-reset" id="panelReset">
+    Restaurar padrão
+  </button>
+</aside><!-- /a11y-panel -->
+
+
+<!-- ============================================================
+     JAVASCRIPT ENGINE — Modular, IIFE encapsulado
+     Módulos: A11Y | Renderer | SplitScreen | ScrollProgress
+     | CounterTEA | ScrollReveal | Modal
+============================================================ -->
+<script>
+(function CognitivaSPA() {
+  'use strict';
+
+  /* ============================================================
+     MÓDULO 1 — ENGINE DE ACESSIBILIDADE
+     Toggle de modos visuais com persistência localStorage
+     e exclusividade mútua entre modos dark/sepia/alto-contraste.
+     Afeta TODA a página via classes no <body>.
+  ============================================================ */
+  const A11Y = {
+    STORAGE_KEY: 'cognitiva.a11y.v2',
+    EXCLUSIVE_MODES: ['dark-mode', 'sepia-mode', 'high-contrast'],
+
+    state: {
+      'dark-mode':    false,
+      'sepia-mode':   false,
+      'high-contrast': false,
+      'dyslexic-mode': false,
+    },
+
+    init() {
+      this.loadFromStorage();
+      this.applyAll();
+      this.bindToggles();
+      this.bindFab();
+      this.bindReset();
+    },
+
+    loadFromStorage() {
+      try {
+        const raw = localStorage.getItem(this.STORAGE_KEY);
+        if (raw) Object.assign(this.state, JSON.parse(raw));
+      } catch (e) {
+        console.warn('Cognitiva A11Y: localStorage indisponível', e);
+      }
+    },
+
+    saveToStorage() {
+      try {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.state));
+      } catch (_) { /* silencioso */ }
+    },
+
+    /* Aplica ou remove cada classe no <body> e sincroniza os botões */
+    applyAll() {
+      Object.keys(this.state).forEach((mode) => {
+        document.body.classList.toggle(mode, this.state[mode]);
+        const btn = document.querySelector(`[data-mode="${mode}"]`);
+        if (btn) btn.setAttribute('aria-checked', String(this.state[mode]));
+      });
+    },
+
+    toggle(mode, isExclusive) {
+      const newValue = !this.state[mode];
+      /* Modos exclusivos: ativar um desativa os outros */
+      if (isExclusive && newValue) {
+        this.EXCLUSIVE_MODES.forEach((m) => {
+          if (m !== mode) this.state[m] = false;
+        });
+      }
+      this.state[mode] = newValue;
+      this.saveToStorage();
+      this.applyAll();
+    },
+
+    bindToggles() {
+      document.querySelectorAll('[data-mode]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          this.toggle(btn.dataset.mode, btn.dataset.exclusive === 'true');
+        });
+      });
+    },
+
+    bindFab() {
+      const fab   = document.getElementById('a11yFab');
+      const panel = document.getElementById('a11yPanel');
+      if (!fab || !panel) return;
+
+      fab.addEventListener('click', () => {
+        const isOpen = panel.classList.toggle('open');
+        fab.setAttribute('aria-expanded', String(isOpen));
+        panel.setAttribute('aria-hidden', String(!isOpen));
+      });
+
+      /* Fecha ao clicar fora */
+      document.addEventListener('click', (e) => {
+        if (!panel.contains(e.target) && !fab.contains(e.target) && panel.classList.contains('open')) {
+          panel.classList.remove('open');
+          fab.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      /* ESC fecha */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && panel.classList.contains('open')) {
+          panel.classList.remove('open');
+          fab.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('aria-hidden', 'true');
+          fab.focus();
+        }
+      });
+    },
+
+    bindReset() {
+      const btn = document.getElementById('panelReset');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        Object.keys(this.state).forEach((k) => (this.state[k] = false));
+        this.saveToStorage();
+        this.applyAll();
+      });
+    },
+  };
+
+
+  /* ============================================================
+     MÓDULO 2 — CONTADOR TEA
+     Animação numérica do crescimento +44,4% ao carregar a página.
+  ============================================================ */
+  const CounterTEA = {
+    init() {
+      const el = document.getElementById('counter-tea');
+      if (!el) return;
+
+      const end      = 44.4;
+      const duration = 1800;
+      let startTs    = null;
+
+      const step = (ts) => {
+        if (!startTs) startTs = ts;
+        const progress = Math.min((ts - startTs) / duration, 1);
+        /* Easing: ease-out cubic */
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = (eased * end).toFixed(1).replace('.', ',');
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    },
+  };
+
+
+  /* ============================================================
+     MÓDULO 3 — RENDERIZADOR DE UNIDADE (SPA Viewport)
+     Injeta JSON padrão Cognitiva no #render-area.
+     O conteúdo aparece suavemente via IntersectionObserver.
+  ============================================================ */
+  const Renderer = {
+    /* Modelo de Dados Cognitiva — JSON Standard
+       Este objeto representa uma unidade de disciplina transposta.
+       Substitua os textos para transpor qualquer unidade real. */
+    unidadeExemplo: {
+      unidade_titulo: 'Unidade III — Teoria dos Sistemas na Educação Superior',
+      topicos: [
+        {
+          subtitulo: 'O ponto de partida',
+          conteudo_html: `
+            <p>A <strong>Teoria Geral dos Sistemas</strong> nasce em 1940, com Ludwig von Bertalanffy. Sua provocação central é simples: nada existe isolado.</p>
+            <p>Na <span class="glossario" tabindex="0" data-tooltip="Conjunto de partes interdependentes que funcionam como um todo coordenado.">instituição de ensino superior</span>, três subsistemas se influenciam o tempo todo:</p>
+            <ul>
+              <li><strong>Pedagógico</strong> — currículo, didática, avaliação</li>
+              <li><strong>Administrativo</strong> — gestão, processos, finanças</li>
+              <li><strong>Tecnológico</strong> — AVA, dados, infraestrutura digital</li>
+            </ul>
+          `,
+        },
+        {
+          subtitulo: 'Por que isso importa para a retenção',
+          conteudo_html: `
+            <p>Quando um subsistema falha, todos os outros sentem o impacto. Um AVA mal projetado <em>não é</em> apenas um problema técnico, mas sim um problema pedagógico que vira problema financeiro.</p>
+            <div class="box-destaque">
+              <span class="box-label">Ponto de Atenção</span>
+              <p>Segundo o INEP, a evasão na graduação a distância no Brasil ultrapassa 30%. A maior parte das causas é <strong>sistêmica</strong>, não individual.</p>
             </div>
-        </section>
-    </main>
+            <div class="box-destaque" style="background:rgba(2,37,61,0.05); border-left-color: var(--marinho);">
+              <span class="box-label">Para Refletir</span>
+              <p>Sua instituição trata evasão como falha do aluno ou como sintoma do sistema?</p>
+            </div>
+          `,
+        },
+        {
+          subtitulo: 'Aprofundamento',
+          conteudo_html: `
+            <p>Os dois conceitos operacionais mais importantes da teoria estão expandidos abaixo. Clique para explorar cada um.</p>
+            <div class="accordion" data-accordion>
+              <div class="accordion-item">
+                <button class="accordion-trigger" aria-expanded="false">
+                  <span>Homeostase — o equilíbrio dinâmico</span>
+                  <span class="chev" aria-hidden="true">▼</span>
+                </button>
+                <div class="accordion-panel">
+                  <p>Capacidade do sistema de manter estabilidade interna diante de pressões externas. Em uma IES, é o que mantém a qualidade pedagógica mesmo durante crises orçamentárias ou trocas de gestão.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-trigger" aria-expanded="false">
+                  <span>Retroalimentação — o sistema que aprende</span>
+                  <span class="chev" aria-hidden="true">▼</span>
+                </button>
+                <div class="accordion-panel">
+                  <p>Mecanismo pelo qual a saída do sistema retorna como nova entrada. Avaliações institucionais, NPS do aluno e analytics de AVA são <strong>loops de retroalimentação</strong>,se você não os escuta, o sistema fica cego.</p>
+                </div>
+              </div>
+            </div>
+          `,
+        },
+      ],
+    },
 
-    <script>
-        function animateCounter() {
-            const obj = document.getElementById('counter-tea');
-            if(!obj) return;
-            const start = 0, end = 44.4, duration = 1800;
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = (progress * (end - start) + start).toFixed(1).replace('.', ',');
-                if (progress < 1) window.requestAnimationFrame(step);
-            };
-            window.requestAnimationFrame(step);
-        }
+    init() {
+      this.render(this.unidadeExemplo);
+      /* O scroll reveal é gerenciado pelo módulo ScrollReveal após o render */
+      this.observeReveal();
+    },
 
-        function switchView(view) {
-            const body = document.body, home = document.getElementById('view-home'), demo = document.getElementById('view-demo'), logo = document.getElementById('header-logo'), nav = document.getElementById('header-nav');
-            if(view === 'demo') {
-                body.classList.add('demo-mode'); body.classList.remove('technical-grid');
-                home.classList.add('hidden'); demo.classList.remove('hidden');
-                logo.style.color = '#E0B565';
-                nav.innerHTML = `<button onclick="switchView('home')" class="font-syndra text-[9px] lg:text-[10px] uppercase tracking-widest border border-[#E0B565]/30 px-5 py-3 lg:px-6 lg:py-3 rounded-sm text-[#E0B565] hover:bg-[#E0B565] hover:text-[#02253D] transition-all"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</button>`;
-            } else {
-                body.classList.remove('demo-mode'); body.classList.add('technical-grid');
-                demo.classList.add('hidden'); home.classList.remove('hidden');
-                logo.style.color = '#02253D';
-                nav.innerHTML = `<button onclick="toggleModal(true)" class="bg-[#02253D] text-white font-syndra text-[9px] lg:text-[10px] px-5 py-3 lg:px-8 lg:py-3 rounded-sm uppercase tracking-widest hover:brightness-125 transition-all">Filie sua Instituição</button>`;
-                setTimeout(animateCounter, 200);
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    render(unidade) {
+      const area = document.getElementById('render-area');
+      if (!area) return;
 
-        function toggleModal(show) { 
-            const m = document.getElementById('agendamento-modal');
-            m.style.display = show ? 'flex' : 'none';
-            document.body.style.overflow = show ? 'hidden' : 'auto';
-        }
+      const topicosHtml = unidade.topicos
+        .map((t) => `<h3>${t.subtitulo}</h3>${t.conteudo_html}`)
+        .join('');
 
-        window.addEventListener('scroll', () => {
-            const h = document.documentElement, b = document.body, st = 'scrollTop', sh = 'scrollHeight';
-            const percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
-            document.getElementById("progress-bar").style.width = percent + "%";
+      area.innerHTML = `<h2>${unidade.unidade_titulo}</h2>${topicosHtml}`;
+      this.bindAccordions();
+    },
+
+    /* Acordeões gerados via JS também precisam de bind */
+    bindAccordions() {
+      document.querySelectorAll('[data-accordion] .accordion-trigger').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const expanded = trigger.getAttribute('aria-expanded') === 'true';
+          const panel    = trigger.nextElementSibling;
+          trigger.setAttribute('aria-expanded', String(!expanded));
+          panel.classList.toggle('open', !expanded);
         });
+      });
+    },
 
-        const scrollObs = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if(e.isIntersecting) { e.target.querySelectorAll('.extract-box').forEach(b => b.classList.add('animate-zoom')); } });
-        }, { threshold: 0.3 });
-
-        window.addEventListener('load', () => {
-            animateCounter();
-            const spa = document.querySelector('#experiencia-spa');
-            if(spa) scrollObs.observe(spa);
+    /* Observa quando #render-area entra no viewport e revela o conteúdo */
+    observeReveal() {
+      const area = document.getElementById('render-area');
+      if (!area) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            area.classList.add('visible');
+            obs.unobserve(area);
+          }
         });
+      }, { threshold: 0.12 });
+      obs.observe(area);
+    },
+  };
 
-        window.onclick = (e) => { if (e.target == document.getElementById('agendamento-modal')) toggleModal(false); }
-    </script>
+
+  /* ============================================================
+     MÓDULO 4 — SPLIT-SCREEN SLIDER
+     Suporta mouse, touch e teclado (range invisível).
+     Posição inicial: 50% (centro).
+  ============================================================ */
+  const SplitScreen = {
+    init() {
+      this.container = document.getElementById('splitContainer');
+      this.cognitiva  = document.getElementById('splitCognitiva');
+      this.divider    = document.getElementById('splitDivider');
+      this.handle     = document.getElementById('splitHandle');
+      this.range      = document.getElementById('splitRange');
+      this.tooltip    = document.getElementById('splitTooltip');
+
+      if (!this.container) return;
+
+      this.setPosition(50);
+      this.bindEvents();
+    },
+
+    setPosition(percent) {
+      percent = Math.max(0, Math.min(100, percent));
+      this.cognitiva.style.clipPath = `inset(0 0 0 ${percent}%)`;
+      this.divider.style.left       = `${percent}%`;
+      this.handle.style.left        = `${percent}%`;
+      this.range.value              = percent;
+    },
+
+    bindEvents() {
+      let isDragging    = false;
+      let userInteracted = false;
+
+      const hideTooltip = () => {
+        if (!userInteracted) {
+          userInteracted = true;
+          this.tooltip.classList.add('hide');
+          setTimeout(() => { this.tooltip.style.display = 'none'; }, 400);
+        }
+      };
+
+      const onMove = (clientX) => {
+        const rect    = this.container.getBoundingClientRect();
+        const percent = ((clientX - rect.left) / rect.width) * 100;
+        this.setPosition(percent);
+      };
+
+      /* Mouse */
+      this.container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        hideTooltip();
+        onMove(e.clientX);
+      });
+      window.addEventListener('mousemove', (e) => { if (isDragging) onMove(e.clientX); });
+      window.addEventListener('mouseup',   ()  => { isDragging = false; });
+
+      /* Touch */
+      this.container.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        hideTooltip();
+        onMove(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (isDragging) onMove(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchend', () => { isDragging = false; });
+
+      /* Teclado via range input acessível */
+      this.range.addEventListener('input', (e) => {
+        hideTooltip();
+        this.setPosition(parseFloat(e.target.value));
+      });
+    },
+  };
+
+
+  /* ============================================================
+     MÓDULO 5 — BARRA DE PROGRESSO DE SCROLL
+     Atualiza a largura do #progress-bar conforme o usuário rola.
+  ============================================================ */
+  const ScrollProgress = {
+    init() {
+      const bar = document.getElementById('progress-bar');
+      const btt = document.getElementById('backToTop');
+      if (!bar) return;
+
+      const update = () => {
+        const h       = document.documentElement;
+        const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+        const clamped  = Math.min(100, Math.max(0, scrolled));
+        bar.style.width = `${clamped}%`;
+        bar.setAttribute('aria-valuenow', Math.round(clamped));
+        /* Mostrar/ocultar botão de voltar ao topo */
+        if (btt) btt.classList.toggle('visible', h.scrollTop > 400);
+      };
+
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    },
+  };
+
+
+  /* ============================================================
+     MÓDULO 6 — SCROLL REVEAL (fade-up)
+     Elementos com classe .fade-up entram suavemente no viewport.
+  ============================================================ */
+  const ScrollReveal = {
+    init() {
+      const elements = document.querySelectorAll('.fade-up');
+      if (!elements.length) return;
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      elements.forEach((el) => obs.observe(el));
+    },
+  };
+
+
+  /* ============================================================
+     BOOT — Inicialização de todos os módulos
+  ============================================================ */
+  const boot = () => {
+    A11Y.init();
+    CounterTEA.init();
+    Renderer.init();
+    SplitScreen.init();
+    ScrollProgress.init();
+    ScrollReveal.init();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+})(); // fim CognitivaSPA IIFE
+
+
+/* ============================================================
+   FUNÇÕES GLOBAIS — Chamadas via atributos onclick no HTML
+   (Modal de agendamento)
+============================================================ */
+
+/**
+ * toggleModal — abre ou fecha o modal de agendamento.
+ * @param {boolean} show — true para abrir, false para fechar.
+ */
+function toggleModal(show) {
+  const modal = document.getElementById('agendamento-modal');
+  if (!modal) return;
+
+  if (show) {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    /* Foco no primeiro campo do formulário */
+    const firstInput = modal.querySelector('.form-input');
+    if (firstInput) setTimeout(() => firstInput.focus(), 60);
+  } else {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+}
+
+/**
+ * handleFormSubmit — intercepta o submit do formulário.
+ * Em produção, substituir pelo POST real ou integração de CRM.
+ */
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const nome  = document.getElementById('modal-nome').value.trim();
+  const email = document.getElementById('modal-email').value.trim();
+
+  if (!nome || !email) {
+    alert('Por favor, preencha ao menos o nome e o e-mail institucional.');
+    return;
+  }
+
+  /* Simulação de envio — substituir por fetch/POST em produção */
+  alert(`Obrigado, ${nome}! Sua solicitação foi registrada com sucesso. Nossa equipe entrará em contato pelo e-mail ${email} em até 24 horas úteis.`);
+  toggleModal(false);
+  e.target.reset();
+}
+
+/* Fechar modal ao clicar no overlay */
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('agendamento-modal');
+  if (e.target === modal) toggleModal(false);
+});
+
+/* Fechar modal com ESC */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') toggleModal(false);
+});
+</script>
+
 </body>
 </html>
