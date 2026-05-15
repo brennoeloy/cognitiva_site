@@ -1891,22 +1891,22 @@ body.high-contrast .ava-chip-highlight { background: #000; border-color: #FFFF00
     <p class="modal-sub">Preencha os dados para análise técnica de acessibilidade institucional.</p>
 
     <!-- Formulário -->
-    <form novalidate onsubmit="handleFormSubmit(event)">
+    <form action="https://formspree.io/f/xbdwvndp" method="POST">
       <div class="form-group">
         <label class="form-label" for="modal-nome">Nome do Gestor</label>
-        <input type="text" id="modal-nome" class="form-input" placeholder="Ex: Dr. Alberto Silva" required />
+        <input type="text" id="modal-nome" name="Nome" class="form-input" placeholder="Ex: Dr. Alberto Silva" required />
       </div>
       <div class="form-group">
         <label class="form-label" for="modal-cargo">Cargo</label>
-        <input type="text" id="modal-cargo" class="form-input" placeholder="Ex: Reitor / Pró-Reitor" required />
+        <input type="text" id="modal-cargo" name="Cargo" class="form-input" placeholder="Ex: Reitor / Pró-Reitor" required />
       </div>
       <div class="form-group">
         <label class="form-label" for="modal-email">E-mail Institucional</label>
-        <input type="email" id="modal-email" class="form-input" placeholder="gestao@ies.edu.br" required />
+        <input type="email" id="modal-email" name="Email" class="form-input" placeholder="gestao@ies.edu.br" required />
       </div>
       <div class="form-group">
         <label class="form-label" for="modal-ies">Nome da IES</label>
-        <input type="text" id="modal-ies" class="form-input" placeholder="Ex: Universidade Cognitiva" required />
+        <input type="text" id="modal-ies" name="Instituicao" class="form-input" placeholder="Ex: Universidade Cognitiva" required />
       </div>
       <button type="submit" class="btn-submit">Confirmar Solicitação</button>
     </form>
@@ -2441,25 +2441,6 @@ function toggleModal(show) {
   }
 }
 
-/**
- * handleFormSubmit — intercepta o submit do formulário.
- * Em produção, substituir pelo POST real ou integração de CRM.
- */
-function handleFormSubmit(e) {
-  e.preventDefault();
-  const nome  = document.getElementById('modal-nome').value.trim();
-  const email = document.getElementById('modal-email').value.trim();
-
-  if (!nome || !email) {
-    alert('Por favor, preencha ao menos o nome e o e-mail institucional.');
-    return;
-  }
-
-  /* Simulação de envio — substituir por fetch/POST em produção */
-  alert(`Obrigado, ${nome}! Sua solicitação foi registrada com sucesso. Nossa equipe entrará em contato pelo e-mail ${email} em até 24 horas úteis.`);
-  toggleModal(false);
-  e.target.reset();
-}
 
 /* Fechar modal ao clicar no overlay */
 document.addEventListener('click', (e) => {
