@@ -1490,6 +1490,37 @@ body.high-contrast .ava-chip-highlight { background: #000; border-color: #FFFF00
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================
+   V-LIBRAS — ISOLAMENTO DE LAYOUT
+   Posiciona o widget no lado ESQUERDO da tela para não colidir
+   com os botões nativos de acessibilidade (.a11y-fab, .back-to-top)
+   localizados no canto inferior/superior DIREITO.
+   Uso de !important garante precedência sobre os estilos
+   injetados dinamicamente pelo próprio plugin V-Libras.
+============================================================ */
+[vw] {
+  position: fixed !important;
+  bottom: 1.5rem !important;
+  left: 1.5rem !important;
+  right: auto !important;
+  z-index: 400 !important; /* abaixo do modal (5000) e do header (500), acima do conteúdo */
+}
+[vw-access-button] {
+  left: 0 !important;
+  right: auto !important;
+}
+[vw-plugin-wrapper] {
+  left: 0 !important;
+  right: auto !important;
+}
+/* Ajuste mobile: alinha ao esquerdo sem overlap */
+@media (max-width: 480px) {
+  [vw] {
+    bottom: 1rem !important;
+    left: 1rem !important;
+  }
+}
 </style>
 </head>
 
@@ -1497,6 +1528,20 @@ body.high-contrast .ava-chip-highlight { background: #000; border-color: #FFFF00
      BODY — classe technical-grid ativa o padrão de pontos de fundo
 ============================================================ -->
 <body class="technical-grid">
+
+<!-- ============================================================
+     V-LIBRAS — Widget oficial de acessibilidade em Libras (Gov.br)
+     Estrutura injetada imediatamente após <body> conforme
+     especificação oficial: https://vlibras.gov.br/doc/widget/
+     O posicionamento (lado esquerdo) é controlado via CSS acima,
+     evitando colisão com os botões nativos de acessibilidade.
+============================================================ -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
 
 <!-- ============================================================
      BARRA DE PROGRESSO — progresso de scroll no topo da página
@@ -2452,6 +2497,19 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') toggleModal(false);
 });
+</script>
+
+<!-- ============================================================
+     V-LIBRAS — Scripts de carregamento e inicialização
+     Posicionados imediatamente antes de </body> conforme
+     documentação oficial. O carregamento assíncrono via src
+     externo não bloqueia o DOM nem interfere com leitores de
+     tela (NVDA / JAWS): o widget inicializa após o parse
+     completo da página, sem criar loops de renderização.
+============================================================ -->
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
 
 </body>
