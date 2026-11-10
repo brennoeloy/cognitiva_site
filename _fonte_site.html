@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cognitiva · Materiais EAD que o aluno neurodivergente consegue estudar</title>
+<meta name="description" content="A Cognitiva adapta as disciplinas EAD da sua instituição para alunos neurodivergentes: conteúdo reestruturado, acessível e pronto para o AVA (SCORM, HTML e PDF acessível).">
+<style>
+/*FONTS*/
+:root{
+  --navy:#043A60;--navy-d:#012943;--navy-dd:#02243D;--gold:#DFB565;--gold-d:#B8903E;--cream:#F5EBDA;
+  --bg:#FFFFFF;--bg2:#F1F2F6;--ink:#10212F;--ink2:#41566A;--line:#DCE2EA;--card:#FFFFFF;
+  --hero-bg:linear-gradient(135deg,#012943 0%,#043A60 60%,#0A4D7C 100%);--hero-ink:#fff;--hero-ink2:#C9D8E6;
+  --btn-bg:#043A60;--btn-ink:#fff;--accent:#B8903E;--focus:#0B6BCB;--shadow:0 10px 30px rgba(1,41,67,.10);
+  --exp-bg:#012943;--exp-card:#0C3A5C;--exp-ink:#F2F6FA;--exp-ink2:#B9CCDC;--exp-line:#255577;
+  --fs:1;--ls:0;
+}
+html[data-theme=escuro]{--bg:#0B1722;--bg2:#101F2D;--ink:#EAF1F7;--ink2:#A8BCCD;--line:#223548;--card:#132636;--btn-bg:#DFB565;--btn-ink:#012943;--accent:#DFB565;--focus:#7DB8FF;--shadow:0 10px 30px rgba(0,0,0,.4)}
+html[data-theme=contraste]{--bg:#000;--bg2:#000;--ink:#FFF;--ink2:#FFF;--line:#FFF;--card:#000;--btn-bg:#FFE600;--btn-ink:#000;--accent:#FFE600;--focus:#00E5FF;--hero-bg:#000;--hero-ink2:#fff;--exp-bg:#000;--exp-card:#000;--exp-ink:#fff;--exp-ink2:#fff;--exp-line:#fff;--shadow:none}
+html[data-theme=creme]{--bg:#F5EBDA;--bg2:#EDE0C8;--ink:#2A2118;--ink2:#5A4B3A;--line:#D9C9AA;--card:#FBF4E6;--btn-bg:#043A60;--btn-ink:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:'InterCog',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:calc(17px*var(--fs));line-height:1.6;color:var(--ink);background:var(--bg);letter-spacing:calc(var(--ls)*1em);-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;color:#000;padding:10px 16px;z-index:100;border-radius:8px}
+.skip:focus{left:8px}
+h1,h2,h3{line-height:1.15;margin:0 0 .5em;letter-spacing:-.02em}
+h1{font-size:clamp(2.1rem,4.4vw,3.2rem);font-weight:800;line-height:1.1}
+.hero-sub{font-size:1.15rem}
+h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:800;line-height:1.12}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0 0 1em}
+.eyebrow{display:inline-block;font-size:1.05rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.lead{font-size:1.15rem;color:var(--ink2);max-width:62ch}
+section{padding:80px 0}
+.alt{background:var(--bg2)}
+.center{text-align:center}.center .lead{margin-inline:auto}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:inherit;font-weight:700;font-size:1rem;padding:15px 26px;border-radius:12px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s;min-height:48px}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-primary{background:var(--btn-bg);color:var(--btn-ink)}
+.btn-gold{background:var(--gold);color:#012943}
+.btn-ghost{background:transparent;border-color:currentColor;color:inherit}
+html[data-theme=contraste] .btn-gold{background:#FFE600;color:#000}
+/* header */
+header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:1.4rem;letter-spacing:-.02em;color:var(--navy)}
+html[data-theme=escuro] .logo,html[data-theme=contraste] .logo{color:#EAF1F7}
+.logo svg{width:38px;height:38px;flex:none}
+nav.main{display:flex;gap:26px;align-items:center}
+nav.main a{text-decoration:none;font-weight:600;font-size:.95rem;color:var(--ink2)}
+nav.main a:hover{color:var(--ink)}
+.tools{display:flex;gap:10px;align-items:center}
+.iconbtn{background:transparent;border:1.5px solid var(--line);color:var(--ink);border-radius:10px;min-width:44px;height:44px;font:inherit;font-weight:700;cursor:pointer}
+.menu{display:none}
+.panel{position:absolute;right:20px;top:72px;width:290px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px;display:none}
+.panel.open{display:block}
+.panel h3{font-size:.95rem;margin-bottom:10px}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.seg button{flex:1 1 auto;font:inherit;font-size:.85rem;font-weight:600;padding:9px 10px;border-radius:10px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--btn-bg);color:var(--btn-ink);border-color:var(--btn-bg)}
+/* hero */
+.hero{background:var(--hero-bg);color:var(--hero-ink);padding:64px 0 72px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-180px;top:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(223,181,101,.22),transparent 70%)}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero .eyebrow{color:var(--gold)}
+.hero p.lead{color:var(--hero-ink2)}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.micro{margin-top:18px;font-size:.88rem;color:var(--hero-ink2)}
+/* compare slider */
+.cmp{position:relative;border-radius:18px;overflow:hidden;background:#fff;color:#10212F;box-shadow:0 30px 60px rgba(0,0,0,.35);user-select:none;touch-action:pan-y}
+.cmp-in{display:grid}
+.cmp-in>div{grid-area:1/1;padding:26px 30px 32px}
+.cmp-before{background:#F4F4F4;font-family:Georgia,'Times New Roman',serif;font-size:.86rem;line-height:1.35;text-align:justify;color:#333}
+.cmp-after{background:#fff;clip-path:inset(0 0 0 var(--pos,50%));font-size:.98rem}
+.tag{display:block;width:max-content;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:99px;margin-bottom:12px}
+.tag.b{background:#d9d9d9;color:#444}.tag.a{background:#043A60;color:#fff}
+.cmp-after h4{margin:0 0 6px;font-size:1.05rem;color:#043A60}
+.cmp-after ol{margin:6px 0 10px;padding-left:20px}
+.cmp-after mark{background:#F6E3B8;color:#012943;padding:0 3px;border-radius:3px;font-weight:700}
+.cmp-after .ex{border-left:4px solid #DFB565;background:#FBF4E6;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.88rem}
+.handle{position:absolute;top:0;bottom:0;left:clamp(24px,var(--pos,50%),calc(100% - 24px));width:4px;margin-left:-2px;background:#DFB565;pointer-events:none}
+.handle::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#DFB565;color:#012943;display:grid;place-items:center;font-weight:800;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.cmp input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.cmp:focus-within .handle::after{outline:3px solid #0B6BCB;outline-offset:3px}
+.snap{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}.snap button{font:inherit;font-size:.85rem;font-weight:600;padding:8px 14px;border-radius:99px;border:1.5px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer;min-height:40px}.snap button:hover{background:rgba(255,255,255,.12)}
+.hint{text-align:center;color:var(--hero-ink2);font-size:.85rem;margin-top:12px}
+/* proof */
+.proof{padding:56px 0;border-bottom:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.stat b{display:block;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.03em;color:var(--navy)}
+html[data-theme=escuro] .stat b{color:var(--gold)}
+html[data-theme=contraste] .stat b{color:#FFE600}
+.stat span{display:block;color:var(--ink2);font-size:.95rem;max-width:34ch}
+.src{font-size:.78rem;color:var(--ink2);margin-top:26px}
+.stat sup a{color:var(--accent)}
+/* cards */
+.cards{display:grid;gap:24px;grid-template-columns:repeat(3,1fr);margin-top:44px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:var(--shadow)}
+.card .ico{width:46px;height:46px;border-radius:12px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:800;margin-bottom:18px}
+html[data-theme=escuro] .card .ico{background:var(--gold);color:#012943}
+.card p{color:var(--ink2);margin:0}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;counter-reset:s}
+.step{position:relative;padding:38px 30px 40px;background:var(--card);border:1px solid var(--line);border-radius:18px}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--gold);color:#012943;font-weight:800;font-size:1.3rem;margin-bottom:20px}
+.step h3{font-size:1.45rem}
+.step p{color:var(--ink2);margin:0;font-size:1.05rem;line-height:1.6}
+#como h2{font-size:clamp(2rem,4.2vw,3.1rem)}
+#como .lead{font-size:1.25rem}
+.deliver{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;justify-content:center}
+.pill{border:1.5px solid var(--line);background:var(--card);padding:12px 22px;border-radius:99px;font-weight:600;font-size:1rem}
+.band{background:var(--bg)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+.vs>div{border-radius:18px;padding:30px 32px;border:1px solid var(--line);background:var(--card)}
+.vs h3{font-size:1.3rem}
+.vs ul{margin:0;padding-left:20px;color:var(--ink2)}.vs li{margin-bottom:10px}
+.vs-b{background:var(--navy)!important;color:#fff;border-color:var(--navy)!important}
+.vs-b ul{color:#D6E4ED}.vs-b h3{color:var(--gold)}
+html[data-theme=escuro] .vs-b{background:#123956!important;border-color:#DFB565!important}
+html[data-theme=contraste] .vs-b{background:#000!important;border:2px solid #FFE600!important}
+@media (max-width:960px){.vs{grid-template-columns:1fr}}
+/* experience */
+#experiencia{background:var(--exp-bg);color:var(--exp-ink);position:relative;overflow:hidden}
+#experiencia .eyebrow{color:var(--gold)}
+#experiencia .lead{color:var(--exp-ink2)}
+.tabs{display:flex;gap:10px;margin:36px 0 26px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:700;padding:14px 22px;border-radius:14px;border:1.5px solid var(--exp-line);background:transparent;color:var(--exp-ink);cursor:pointer;display:flex;gap:10px;align-items:center;min-height:50px}
+.tab i{font-style:normal;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--exp-line);font-size:.8rem}
+.tab[aria-selected=true]{background:var(--gold);color:#012943;border-color:var(--gold)}
+.tab[aria-selected=true] i{background:#012943;color:var(--gold)}
+html[data-theme=contraste] .tab[aria-selected=true]{background:#FFE600;color:#000}
+.stage{background:var(--exp-card);border:1px solid var(--exp-line);border-radius:22px;padding:34px}
+.stage[hidden]{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.chip{font:inherit;font-weight:600;font-size:.92rem;padding:10px 16px;border-radius:99px;border:1.5px solid var(--exp-line);background:transparent;color:var(--exp-ink);cursor:pointer;min-height:44px}
+.chip[aria-pressed=true]{background:var(--exp-ink);color:#012943;border-color:var(--exp-ink)}
+.sim-box{position:relative;background:#fff;color:#222;border-radius:16px;padding:30px;min-height:260px;overflow:hidden;font-family:Georgia,'Times New Roman',serif;font-size:1.02rem;line-height:1.55;text-align:justify}
+.sim-box.low{filter:blur(1.1px) contrast(.8)}
+.sim-note{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;margin-top:18px;color:var(--exp-ink2);font-size:.9rem}
+.distract{position:absolute;pointer-events:none;background:#fff;color:#222;border:1px solid #ccc;border-radius:10px;padding:8px 12px;font:600 .8rem system-ui,sans-serif;box-shadow:0 6px 16px rgba(0,0,0,.25);transition:all 1.4s ease}
+.sim-q{margin-top:22px;font-weight:700;font-size:1.1rem}
+.compare2{display:grid;grid-template-columns:1fr 1.15fr;gap:22px;align-items:start}
+.pane{background:#fff;color:#12222f;border-radius:16px;padding:24px;min-height:300px}
+.pane.orig{background:#F4F4F4;font-family:Georgia,'Times New Roman',serif;text-align:justify;line-height:1.45;font-size:.95rem}
+.lbl{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:var(--exp-ink2);font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+/* student unit */
+.unit{--ufs:1;font-size:calc(1rem*var(--ufs));line-height:1.65;transition:all .25s}
+.unit.dys{font-family:Verdana,'InterCog',sans-serif;letter-spacing:.06em;word-spacing:.18em;line-height:1.95;background:#FAF3E3;color:#2a2118;text-align:left}
+.unit.dys .blk{max-width:62ch}
+.unit.lv{--ufs:1.4;background:#000;color:#fff;font-weight:600}
+.unit.lv h4{color:#FFE600}
+.unit.lv .term{background:#FFE600;color:#000;border-bottom:2px solid #fff}
+.unit.lv .ex{color:#fff}.unit.lv .ex b{color:#FFE600}
+.unit.lv .chk{background:#000;color:#fff;border-color:#FFE600}
+.unit.lv .chk .opts button{background:#000;color:#fff;border-color:#fff}
+.unit.lv .chk .opts button.ok{background:#003D1A;border-color:#00FF7F}
+.unit.lv .chk .opts button.no{background:#4D0000;border-color:#FF8A80}
+.unit.lv .sum{background:#000;border:2px solid #FFE600;color:#fff}
+.unit.lv .utool{border-color:#fff}
+.unit.lv .utool button{background:#000;color:#fff;border-color:#fff}
+.unit.lv .utool button[aria-pressed=true]{background:#FFE600;color:#000;border-color:#FFE600}
+.unit.lv .prog{background:#444}
+.unit.lv .done{background:#003D1A;color:#fff;border:2px solid #00FF7F}
+.unit.lv .nextbtn{background:#FFE600;color:#000}
+.unit.lv .ex{background:#111;border-color:#FFE600}
+.unit.lv .def{background:#111;color:#fff;border-color:#FFE600}
+.unit.dark{background:#0B1722;color:#EAF1F7}
+.unit.cream{background:#F5EBDA;color:#2A2118}
+.utool{display:flex;flex-wrap:wrap;gap:8px;padding:0 0 14px;border-bottom:1px solid #dde3ea;margin-bottom:14px}
+.utool button{font:inherit;font-size:.82rem;font-weight:700;padding:7px 12px;border-radius:9px;border:1.5px solid #c9d2dc;background:#fff;color:#12222f;cursor:pointer;min-height:38px}
+.utool button[aria-pressed=true]{background:#043A60;color:#fff;border-color:#043A60}
+.prog{height:8px;border-radius:99px;background:#dde3ea;overflow:hidden;margin:0 0 6px}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#DFB565,#B8903E);transition:width .5s}
+.progtxt{font-size:.8rem;color:#52667a;margin-bottom:14px;display:flex;justify-content:space-between}
+.unit.lv .progtxt,.unit.dark .progtxt{color:inherit}
+.obj{background:#EDF3F9;border-radius:10px;padding:10px 14px;font-weight:600;margin-bottom:14px;color:#043A60}
+.unit.lv .obj{background:#111;color:#FFE600;border:1px solid #FFE600}
+.unit.dark .obj{background:#16324a;color:#DFB565}
+.road{margin:0 0 14px;padding:10px 14px;background:#FBF4E6;border-radius:10px;font-size:.92rem;color:#2a2118}
+.blk{margin-bottom:16px;padding:2px 0}
+.blk h4{margin:0 0 4px;font-size:1.05em;color:#043A60;font-weight:800}
+.unit.dark .blk h4{color:#DFB565}
+.blk .next{font-size:.8em;opacity:.7;margin-top:4px}
+.focusmode .blk{opacity:.28;transition:opacity .2s}
+.focusmode .blk.on{opacity:1}
+.term{font:inherit;font-weight:700;color:#043A60;background:#F6E3B8;border:0;border-bottom:2px dotted #B8903E;border-radius:3px;padding:0 3px;cursor:pointer}
+.unit.dark .term{background:#2a3d52;color:#DFB565}
+.def{display:block;margin:6px 0;padding:8px 12px;font-size:.88em;background:#fff;color:#12222f;border:1.5px solid #DFB565;border-radius:10px}
+.def[hidden]{display:none}
+.ex{border-left:4px solid #DFB565;background:#FBF4E6;padding:10px 14px;border-radius:0 10px 10px 0;margin:12px 0;color:#2a2118}
+.ex b{color:#7a5a14}
+.unit.dark .ex{background:#16324a;color:#EAF1F7}
+.chk{border:2px solid #043A60;border-radius:14px;padding:16px;margin:16px 0;background:#fff;color:#12222f}
+.unit.dark .chk{background:#132636;color:#EAF1F7;border-color:#DFB565}
+.chk .opts{display:grid;gap:8px;margin-top:10px}
+.chk .opts button{font:inherit;text-align:left;padding:12px 14px;border-radius:10px;border:1.5px solid #c9d2dc;background:#fff;color:#12222f;cursor:pointer;min-height:46px}
+.chk .opts button:hover{border-color:#043A60}
+.chk .opts button.ok{background:#E3F4E8;border-color:#1D7A3F}
+.chk .opts button.no{background:#FBE7E7;border-color:#B3261E}
+.fb{margin-top:10px;font-weight:600}
+.sum{background:#043A60;color:#fff;border-radius:14px;padding:14px 18px;margin-top:14px}
+.sum ul{margin:6px 0 0;padding-left:20px}
+.nextbtn{font:inherit;font-weight:700;padding:12px 20px;border-radius:12px;border:0;background:#DFB565;color:#012943;cursor:pointer;min-height:46px}
+.done{display:none;margin-top:14px;padding:14px;border-radius:12px;background:#E3F4E8;color:#14532d;font-weight:700}
+.done.show{display:block;animation:pop .5s}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+/* areas */
+.areas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.area{background:var(--exp-card);border:1px solid var(--exp-line);border-radius:16px;padding:22px}
+.area h3{color:var(--gold);margin-bottom:6px}
+.area p{color:var(--exp-ink2);margin:0 0 14px;font-size:.93rem}
+.pil{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+.pil>div{border-radius:18px;padding:30px 32px}
+.pil-a{background:linear-gradient(135deg,#DFB565,#C99A45);color:#012943}
+.pil-b{background:transparent;border:1.5px solid var(--exp-line)}
+.pil h3{font-size:1.6rem;margin:10px 0 14px}
+.pil ul{list-style:none;padding:0;margin:0}
+.pil li{padding-left:32px;position:relative;margin-bottom:12px;font-size:1.1rem;font-weight:600}
+.pil li::before{content:"✓";position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:#012943;color:#DFB565;display:grid;place-items:center;font-size:.8rem;font-weight:800}
+.pil-b li{color:var(--exp-ink);font-weight:500}
+.pil-b li::before{background:var(--gold);color:#012943}
+.pil-tag{display:inline-block;background:#012943;color:#DFB565;font-weight:800;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:99px}
+.pil-tag.sec{background:var(--gold);color:#012943}
+.pil-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+html[data-theme=contraste] .pil-a{background:#000;border:2px solid #FFE600;color:#fff}
+html[data-theme=contraste] .pil-tag{background:#FFE600;color:#000}
+@media (max-width:960px){.pil{grid-template-columns:1fr}.pil-cta .btn{width:100%;justify-content:center}}
+.parceiros{background:var(--bg2);padding:64px 0}
+.plist{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:34px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 30px;min-width:200px;text-align:center;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.pcard img{max-height:56px;max-width:180px;object-fit:contain}
+.pcard b{font-size:1.25rem;font-weight:800;color:var(--navy);letter-spacing:-.01em}
+html[data-theme=escuro] .pcard b{color:var(--gold)}
+html[data-theme=contraste] .pcard b{color:#FFE600}
+.pquote{max-width:760px;margin:34px auto 0;text-align:center;font-size:1.3rem;font-weight:600;line-height:1.4}
+.pquote small{display:block;margin-top:10px;font-size:.95rem;color:var(--ink2);font-weight:500}
+/* features */
+.feat{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:52px}
+#acessibilidade h2{font-size:clamp(2rem,4.2vw,3.1rem)}#acessibilidade .lead{font-size:1.25rem}
+.fi{display:flex;gap:20px;align-items:flex-start;padding:32px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.fi .ico{flex:none;width:56px;height:56px;font-size:1.4rem;border-radius:14px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:800}
+html[data-theme=escuro] .fi .ico{background:var(--gold);color:#012943}
+.fi h3{margin:0 0 6px;font-size:1.3rem}.fi p{margin:0;color:var(--ink2);font-size:1.05rem}
+.honest{margin-top:44px;border:2px solid var(--accent);border-radius:18px;padding:34px 36px;font-size:1.05rem;background:var(--card)}
+.honest h3{margin-bottom:10px}
+.honest ul{margin:0;padding-left:20px;color:var(--ink2)}
+.honest li{margin-bottom:6px}
+/* faq */
+details{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 22px;margin-bottom:12px}
+summary{cursor:pointer;font-weight:700;padding:20px 0;list-style:none;display:flex;justify-content:space-between;gap:16px;min-height:48px}
+summary::after{content:"+";font-size:1.4rem;color:var(--accent)}
+details[open] summary::after{content:"–"}
+details p{color:var(--ink2);padding-bottom:18px;margin:0}
+/* contact */
+.contato{background:var(--hero-bg);color:var(--hero-ink)}
+.contato .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contato .eyebrow{color:var(--gold)}
+.contato .lead{color:var(--hero-ink2)}
+form{background:#fff;color:#12222f;border-radius:20px;padding:30px;box-shadow:0 30px 60px rgba(0,0,0,.3)}
+html[data-theme=contraste] form{background:#000;color:#fff;border:2px solid #fff}
+label{display:block;font-weight:700;font-size:.9rem;margin-bottom:6px}
+input,select,textarea{width:100%;font:inherit;padding:13px 14px;border-radius:10px;border:1.5px solid #b9c5d1;background:#fff;color:#12222f;margin-bottom:16px;min-height:48px}
+html[data-theme=contraste] input,html[data-theme=contraste] select,html[data-theme=contraste] textarea{background:#000;color:#fff;border-color:#fff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.note{font-size:.8rem;color:#52667a;margin:8px 0 0}
+.ok-msg{display:none;margin-top:14px;padding:12px;border-radius:10px;background:#E3F4E8;color:#14532d;font-weight:600}
+ul.checks{list-style:none;padding:0;margin:26px 0 0}
+ul.checks li{padding-left:34px;position:relative;margin-bottom:14px;color:var(--hero-ink2)}
+ul.checks li::before{content:"✓";position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--gold);color:#012943;display:grid;place-items:center;font-weight:800;font-size:.85rem}
+footer{background:var(--navy-dd);color:#B9CCDC;padding:44px 0;font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer a{color:#fff}
+
+.trust{list-style:none;display:flex;gap:10px 22px;flex-wrap:wrap;padding:0;margin:26px 0 0;color:var(--hero-ink)}
+.trust li{font-weight:600;font-size:1rem;display:flex;gap:8px;align-items:center}
+.trust li::before{content:"✓";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#012943;font-size:.8rem;font-weight:800}
+.stat span{font-size:1.15rem;max-width:26ch}
+.stat b{font-size:clamp(2.6rem,5vw,4rem)}
+details.fontes{border:0;background:transparent;padding:0;margin-top:18px}
+details.fontes summary{font-size:.8rem;font-weight:500;color:var(--ink2);padding:6px 0;min-height:0;justify-content:flex-start}
+details.fontes summary::after{content:""}
+.bigcards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.bc{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px 30px;box-shadow:var(--shadow);text-align:center}
+.bc .ico{width:64px;height:64px;border-radius:18px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:1.9rem;font-weight:800;margin:0 auto 18px}
+html[data-theme=escuro] .bc .ico{background:var(--gold);color:#012943}
+.bc h3{font-size:1.7rem;margin-bottom:8px}
+.bc p{font-size:1.2rem;color:var(--ink2);margin:0;line-height:1.4}
+.punch{font-size:clamp(1.25rem,2.4vw,1.7rem);font-weight:700;color:var(--accent);margin-top:14px}
+.vs li{font-size:1.15rem;margin-bottom:12px}.vs h3{font-size:1.4rem}
+.vs-a li::marker{content:"✕  ";color:#C0392B;font-weight:800}
+.vs-b li::marker{content:"✓  ";color:#DFB565;font-weight:800}
+.vs ul{padding-left:1.4em}
+.steps{margin-top:48px}
+.step{text-align:center}
+.step::before{margin-inline:auto}
+.step h3{font-size:1.4rem}.step p{font-size:1.15rem}
+.measure{text-align:center;font-size:1.25rem;margin:40px 0 0}
+.fi h3{font-size:1.25rem}.fi p{font-size:1.1rem}
+.selecao{background:rgba(223,181,101,.18);border:1.5px solid var(--gold);color:#fff;border-radius:12px;padding:12px 16px;font-weight:700;font-size:1.1rem}
+.urg{margin-top:26px;font-weight:700;color:var(--gold);font-size:1.1rem}
+.contato h2{font-size:clamp(2rem,4vw,3rem)}
+details.mais{border:0;padding:0;background:transparent;margin-bottom:10px}
+details.mais summary{font-size:.9rem;font-weight:600;color:#043A60;min-height:36px;padding:6px 0;justify-content:flex-start;gap:8px}
+details.mais summary::after{content:"+"}
+.sticky{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(150%);z-index:60;display:flex;gap:14px;align-items:center;background:#012943;color:#fff;border:1.5px solid var(--gold);border-radius:16px;padding:12px 14px 12px 22px;box-shadow:0 14px 40px rgba(0,0,0,.35);transition:transform .35s;max-width:calc(100% - 24px)}
+.sticky.show{transform:translateX(-50%) translateY(0)}
+.sticky span{font-weight:700;font-size:1.02rem}
+.sticky .btn{padding:11px 20px;white-space:nowrap}
+.sticky button.x{background:transparent;border:0;color:#B9CCDC;font-size:1.5rem;cursor:pointer;min-width:40px;min-height:40px}
+.sticky.pulse .btn{animation:pl 1.2s 3}
+@keyframes pl{0%,100%{box-shadow:0 0 0 0 rgba(223,181,101,.7)}50%{box-shadow:0 0 0 12px rgba(223,181,101,0)}}
+@media (max-width:960px){.bigcards{grid-template-columns:1fr}.sticky{left:12px;right:12px;transform:translateY(150%);max-width:none;bottom:12px}.sticky.show{transform:translateY(0)}.sticky span{font-size:.95rem}}
+@media (max-width:960px){
+  .hero .grid,.contato .grid,.compare2{grid-template-columns:1fr}
+  .cards,.stats,.areas{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .feat{grid-template-columns:1fr}
+  nav.main{display:none}
+  nav.main.open{display:flex;position:absolute;left:0;right:0;top:70px;flex-direction:column;background:var(--bg);padding:18px 24px;border-bottom:1px solid var(--line);align-items:flex-start}
+  .menu{display:block}
+  section{padding:64px 0}
+  .stage{padding:20px}
+  .panel{right:12px}
+}
+@media (max-width:560px){.hero{padding:40px 0 48px}.hero .eyebrow{display:none}h1{font-size:2.1rem}.hero-sub{font-size:1rem;margin-bottom:0}.hero .cta-row{margin-top:20px}.hero .cta-row .btn{width:100%;justify-content:center}.trust{margin-top:18px;gap:8px 16px}.trust li{font-size:.9rem}.hero .hint{display:none}.hero .snap{margin-top:10px}.hero .grid{gap:30px}.cmp-before{font-size:.78rem}.cmp-after{font-size:.9rem}.steps{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.hide-sm{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+.legal{padding:48px 0 80px;max-width:820px}
+.legal .back{display:inline-flex;margin-bottom:18px;font-weight:700;color:var(--navy);text-decoration:none}
+.legal h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:0 0 8px}
+.legal h2{font-size:1.2rem;margin:30px 0 8px}
+.legal p,.legal li{font-size:1rem;line-height:1.65}
+.legal li{margin:4px 0}
+.legal .tw{overflow-x:auto;margin:14px 0}
+.legal table{border-collapse:collapse;min-width:640px;font-size:.88rem}
+.legal th,.legal td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.legal th{background:var(--card,#fff)}
+mark.ph{background:#FFE08A;color:#3a2a00;padding:0 3px;border-radius:3px}
+.legal-links a{color:#fff;margin-right:14px}
+.legal-open .sticky{display:none}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="top">
+ <div class="wrap bar">
+  <a class="logo" href="#topo" aria-label="Cognitiva, início">
+   <svg viewBox="0 0 40 40" aria-hidden="true"><defs><mask id="m"><rect width="40" height="40" fill="#fff"/><circle cx="24.5" cy="19.5" r="12.5" fill="#000"/></mask></defs><circle cx="18.5" cy="20" r="17.5" fill="currentColor" mask="url(#m)"/><circle cx="24.5" cy="19.5" r="8" fill="#DFB565"/></svg>
+   <span>COGNITIVA<b style="color:#DFB565">.</b></span>
+  </a>
+  <nav class="main" id="nav" aria-label="Principal">
+   <a href="#solucao">Desafio</a><a href="#parceiros" id="navPar" hidden>Parceiros</a><a href="#experiencia">Na prática</a><a href="#como">Como funciona</a><a href="#acessibilidade">Qualidade</a><a href="#faq">Perguntas</a>
+  </nav>
+  <div class="tools">
+   <button class="iconbtn" id="btnComfort" aria-expanded="false" aria-controls="panel" aria-label="Opções de leitura e tema">Aa</button>
+   <a class="btn btn-primary hide-sm" href="#contato" style="padding:11px 20px">Piloto gratuito</a>
+   <button class="iconbtn menu" id="btnMenu" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu">☰</button>
+  </div>
+ </div>
+ <div class="panel" id="panel" role="dialog" aria-label="Opções de leitura">
+  <h3>Tema</h3>
+  <div class="seg" id="segTheme">
+   <button data-t="claro" aria-pressed="true">Claro</button><button data-t="escuro" aria-pressed="false">Escuro</button><button data-t="contraste" aria-pressed="false">Alto contraste</button><button data-t="creme" aria-pressed="false">Creme</button>
+  </div>
+  <h3>Tamanho do texto</h3>
+  <div class="seg" id="segSize"><button data-s="1" aria-pressed="true">Normal</button><button data-s="1.15" aria-pressed="false">Grande</button><button data-s="1.3" aria-pressed="false">Maior</button></div>
+  <h3>Espaçamento</h3>
+  <div class="seg" id="segSp"><button data-l="0" aria-pressed="true">Normal</button><button data-l=".04" aria-pressed="false">Ampliado</button></div>
+ </div>
+</header>
+
+<main id="conteudo">
+<div id="topo"></div>
+<!-- HERO -->
+<section class="hero" aria-labelledby="h1">
+ <div class="wrap grid">
+  <div>
+   <span class="eyebrow">Adaptação de materiais EAD · Neurodiversidade</span>
+   <h1 id="h1">Material <em>acessível</em> para todos os alunos.</h1>
+   <p class="lead hero-sub">Adaptamos suas disciplinas EAD para alunos neurodivergentes.</p>
+   <div class="cta-row">
+    <a class="btn btn-gold" href="#contato">Receba um piloto gratuito →</a>
+   </div>
+   <ul class="trust"><li>Sem trocar de AVA</li><li>Validado por psicopedagogos</li></ul>
+  </div>
+  <div>
+   <div class="cmp" id="cmp" style="--pos:50%">
+    <div class="cmp-in">
+     <div class="cmp-before"><span class="tag b">Material original</span>
+      A homeostase é o conjunto de mecanismos pelos quais o organismo mantém relativamente constantes as condições do meio interno, a despeito das variações do ambiente externo, o que se dá, predominantemente, por meio de circuitos de retroalimentação negativa nos quais um sensor detecta o desvio de determinada variável em relação ao seu ponto de ajuste, um centro integrador compara a informação recebida com o valor de referência e um efetor desencadeia resposta que se opõe à alteração inicial, restabelecendo o equilíbrio, como ocorre na termorregulação e no controle da glicemia.</div>
+     <div class="cmp-after"><span class="tag a">Com a Cognitiva</span>
+      <h4>O que é homeostase</h4>
+      <p style="margin:0 0 6px">O corpo mantém o <mark>meio interno estável</mark>, mesmo quando o ambiente muda. Isso acontece em 3 passos:</p>
+      <ol><li><b>Sensor</b> detecta a mudança</li><li><b>Centro integrador</b> compara com o valor ideal</li><li><b>Efetor</b> age para desfazer a mudança</li></ol>
+      <div class="ex"><b>Exemplo:</b> você corre ao sol, a temperatura sobe e o corpo começa a suar.</div></div>
+    </div>
+    <div class="handle" aria-hidden="true"></div>
+    <input type="range" min="0" max="100" value="50" id="cmpR" aria-label="Arraste para comparar o material original com a versão adaptada">
+   </div>
+   <div class="snap" role="group" aria-label="Ver versão"><button type="button" data-pos="100">Só o original</button><button type="button" data-pos="50">Comparar</button><button type="button" data-pos="0">Só a adaptação</button></div>
+   <p class="hint">Arraste ou use os botões · exemplo ilustrativo criado pela Cognitiva</p>
+  </div>
+ </div>
+</section>
+
+<!-- DADOS -->
+<section class="proof" aria-label="Contexto do ensino superior">
+ <div class="wrap">
+  <div class="stats">
+   <div class="stat"><b>95.572</b><span>alunos com deficiência na graduação em 2024<sup><a href="#fontes" aria-label="ver fonte 1">1</a></sup></span></div>
+   <div class="stat"><b>+64%</b><span>alunos com autismo no superior em 1 ano<sup><a href="#fontes" aria-label="ver fonte 2">2</a></sup></span></div>
+   <div class="stat"><b>Por lei</b><span>acessibilidade é dever da instituição<sup><a href="#fontes" aria-label="ver fonte 3">3</a></sup></span></div>
+  </div>
+  <details class="fontes" id="fontes"><summary>Fontes dos dados</summary><p class="src">(1) Inep, Censo da Educação Superior 2024, conforme reportado por Band e O Povo (set/2026): 33.377 matrículas em 2014 e 95.572 em 2024. (2) Inep, Censo da Educação Superior 2024, conforme citado em publicação acadêmica (Anais Even3): de 9.718 (2023) para 15.941 (2024). (3) Lei nº 13.146/2015, art. 27. O Censo registra apenas parte dos perfis neurodivergentes; alunos com TDAH ou dislexia nem sempre aparecem.</p></details>
+ </div>
+</section>
+
+<!-- PARCEIROS -->
+<section class="parceiros" id="parceiros" aria-labelledby="h-par" hidden>
+ <div class="wrap">
+  <div class="center"><h2 id="h-par">Instituições que confiam na Cognitiva</h2></div>
+  <div class="plist" id="plist"></div>
+  <div class="pquote" id="pquote" hidden></div>
+ </div>
+</section>
+
+<!-- DESAFIO -->
+<section id="solucao" aria-labelledby="h-prob">
+ <div class="wrap">
+  <div class="center"><h2 id="h-prob">O aluno está lá, e o material?</h2></div>
+  <div class="bigcards">
+   <div class="bc"><div class="ico">↓</div><h3>Evasão</h3><p>Cada aluno que sai é mensalidade perdida.</p></div>
+   <div class="bc"><div class="ico">!</div><h3>Risco</h3><p>Material inacessível pesa em reclamações e auditorias.</p></div>
+   <div class="bc"><div class="ico">∞</div><h3>Retrabalho</h3><p>Adaptar na mão é um problema que não escala.</p></div>
+  </div>
+  <div class="center" style="margin-top:40px"><a class="btn btn-primary" href="#contato">Receba um piloto gratuito →</a></div>
+ </div>
+</section>
+
+<!-- EXPERIENCIA / PORTFOLIO -->
+<section id="experiencia" aria-labelledby="h-exp">
+ <div class="wrap">
+  <span class="eyebrow">Portfólio interativo</span>
+  <h2 id="h-exp">Veja a adaptação na prática</h2>
+  <p class="lead">Experimente em 1 minuto. É a mesma unidade que o aluno recebe.</p>
+  <p class="note" style="margin-top:-8px">Conteúdos de exemplo produzidos pela Cognitiva, sem valor de orientação profissional. As simulações são aproximações educativas.</p>
+  <div class="tabs" role="tablist" aria-label="Etapas da experiência">
+   <button class="tab" role="tab" id="t1" aria-selected="true" aria-controls="s1"><i>1</i>Sinta a barreira</button>
+   <button class="tab" role="tab" id="t2" aria-selected="false" aria-controls="s2"><i>2</i>Veja a transformação</button>
+   <button class="tab" role="tab" id="t3" aria-selected="false" aria-controls="s3"><i>3</i>Seu piloto</button>
+  </div>
+
+  <!-- ATO 1 -->
+  <div class="stage" id="s1" role="tabpanel" aria-labelledby="t1">
+   <p style="margin-top:0;color:var(--exp-ink2);font-size:1.1rem"><b style="color:var(--exp-ink)">Escolha uma situação e leia.</b> Simulação aproximada, cada pessoa vive de um jeito.</p>
+   <div class="chips" role="group" aria-label="Simulações">
+    <button class="chip" data-sim="none" aria-pressed="true">Leitura típica</button>
+    <button class="chip" data-sim="dys" aria-pressed="false">Letras que se embaralham</button>
+    <button class="chip" data-sim="adhd" aria-pressed="false">Atenção disputada</button>
+    <button class="chip" data-sim="low" aria-pressed="false">Visão reduzida</button>
+   </div>
+   <div class="sim-box" id="simBox"><div id="simText">A prescrição extintiva é a perda da pretensão pelo decurso do tempo, de modo que o titular do direito, inerte durante o prazo fixado em lei, não mais poderá exigir judicialmente o cumprimento da obrigação, ressalvadas as causas que impedem, suspendem ou interrompem o curso do prazo, as quais, uma vez configuradas, alteram o termo inicial ou reabrem a contagem integral do lapso temporal, sem que isso, contudo, afete a existência do direito subjetivo em si.</div></div>
+   <p class="sim-q" id="simQ" aria-live="polite">Agora imagine estudar uma disciplina inteira assim, à noite, depois do trabalho.</p>
+   <div class="sim-note"><span>Isso é o que muitos alunos enfrentam todos os dias.</span><button class="btn btn-gold" id="goT2">Agora veja adaptado →</button></div>
+  </div>
+
+  <!-- ATO 2 -->
+  <div class="stage" id="s2" role="tabpanel" aria-labelledby="t2" hidden>
+   <div class="chips" role="group" aria-label="Área do conteúdo" id="areaChips"></div>
+   <div class="chips" role="group" aria-label="Perfil do aluno" id="profChips">
+    <button class="chip" data-p="padrao" aria-pressed="true">Versão acessível padrão</button>
+    <button class="chip" data-p="tdah" aria-pressed="false">Foco e atenção (TDAH)</button>
+    <button class="chip" data-p="dys" aria-pressed="false">Leitura (dislexia)</button>
+    <button class="chip" data-p="tea" aria-pressed="false">Previsibilidade (TEA)</button>
+    <button class="chip" data-p="lv" aria-pressed="false">Baixa visão</button>
+   </div>
+   <div class="compare2">
+    <div><div class="lbl"><span>Material original</span></div><div class="pane orig" id="origPane"></div></div>
+    <div><div class="lbl"><span>Como o aluno recebe</span><span id="profNote" style="text-transform:none;letter-spacing:0;font-weight:600"></span></div><div class="pane" id="unitPane"></div></div>
+   </div>
+   <div class="sim-note" style="margin-bottom:0"><span>Clique nos termos, responda à pergunta, mude o tema.</span><button class="btn btn-gold" id="goForm2">Receba um piloto gratuito →</button></div>
+  </div>
+
+  <!-- ATO 3 -->
+  <div class="stage" id="s3" role="tabpanel" aria-labelledby="t3" hidden>
+   <div class="pil">
+    <div class="pil-a">
+     <span class="pil-tag">Piloto gratuito</span>
+     <h3>Uma disciplina inteira, adaptada por nós</h3>
+     <ul>
+      <li>Sem custo e sem compromisso de contratação</li>
+      <li>Com o conteúdo real da sua instituição</li>
+      <li>Validado por psicopedagogos</li>
+      <li>Entregue em SCORM, HTML e PDF acessível</li>
+      <li>Testado no seu AVA</li>
+     </ul>
+    </div>
+    <div class="pil-b">
+     <span class="pil-tag sec">Confidencialidade</span>
+     <h3>Seu material fica protegido</h3>
+     <ul>
+      <li>Contrato de confidencialidade (NDA) assinado antes de qualquer envio</li>
+      <li>Arquivos usados só para a sua adaptação</li>
+      <li>Conteúdo nunca divulgado; o nome da instituição só aparece com a sua autorização</li>
+      <li>Tratamento de dados conforme a LGPD</li>
+      <li>Arquivos excluídos ao fim do piloto, se você pedir</li>
+     </ul>
+    </div>
+   </div>
+   <div class="pil-cta">
+    <button class="btn btn-gold" id="btnPiloto">Quero meu piloto gratuito →</button>
+    <button class="btn btn-ghost" id="btnReuniao">Agendar reunião de 30 min</button>
+    <button class="btn btn-ghost" id="btnDuvidas">Tirar dúvidas</button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- DIFERENCA -->
+<section class="band" aria-labelledby="h-pdf">
+ <div class="wrap">
+  <div class="center"><h2 id="h-pdf">Você não precisa de outro PDF.<br>Precisa da Cognitiva.</h2>
+  <p class="punch">Quem adapta sem especialista perde conteúdo.</p></div>
+  <div class="vs">
+   <div class="vs-a"><h3>Por conta própria (PDF ou IA)</h3><ul><li>Conteúdo cortado pelo caminho</li><li>Texto simplificado sem critério</li><li>Ninguém responde pelo resultado</li><li>Retrabalho a cada disciplina</li></ul></div>
+   <div class="vs-b"><h3>Com a Cognitiva</h3><ul><li>Conteúdo técnico preservado</li><li>Psicopedagogos validam cada unidade</li><li>Pronto para o seu AVA</li><li>Uma equipe responsável pela entrega</li></ul></div>
+  </div>
+  <div class="center" style="margin-top:40px"><a class="btn btn-primary" href="#contato">Receba uma disciplina e compare →</a></div>
+ </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="alt" id="como" aria-labelledby="h-como">
+ <div class="wrap">
+  <div class="center"><h2 id="h-como">Do seu material ao AVA em 4 passos</h2></div>
+  <div class="steps">
+   <div class="step"><h3>Você envia</h3><p>o material da disciplina</p></div>
+   <div class="step"><h3>Nós adaptamos</h3><p>em blocos curtos e claros</p></div>
+   <div class="step"><h3>Psicopedagogos validam</h3><p>cada unidade</p></div>
+   <div class="step"><h3>Você recebe</h3><p>pronto para o AVA</p></div>
+  </div>
+  <p class="measure"><b>E você acompanha:</b> conclusão e nota por aluno no relatório do AVA.</p>
+  <div class="deliver" aria-label="Formatos de entrega"><span class="pill">SCORM 1.2 e 2004</span><span class="pill">HTML responsivo</span><span class="pill">PDF acessível</span></div>
+  <div class="center" style="margin-top:36px"><a class="btn btn-primary" href="#contato">Receba um piloto gratuito →</a></div>
+ </div>
+</section>
+
+<!-- QUALIDADE -->
+<section id="acessibilidade" aria-labelledby="h-q">
+ <div class="wrap">
+  <div class="center"><h2 id="h-q">Feito para o aluno e para a auditoria</h2></div>
+  <div class="feat">
+   <div class="fi"><div class="ico">◐</div><div><h3>Leitura sob medida</h3><p>Temas, tamanho e espaçamento.</p></div></div>
+   <div class="fi"><div class="ico">◎</div><div><h3>Modo foco</h3><p>Um bloco por vez, sem distração.</p></div></div>
+   <div class="fi"><div class="ico">☰</div><div><h3>Estrutura previsível</h3><p>Sempre na mesma ordem.</p></div></div>
+   <div class="fi"><div class="ico">✎</div><div><h3>Imagens descritas</h3><p>Texto alternativo em tudo.</p></div></div>
+   <div class="fi"><div class="ico">⌨</div><div><h3>Teclado e Libras</h3><p>Sem mouse, com VLibras.</p></div></div>
+   <div class="fi"><div class="ico">🔊</div><div><h3>Ouvir o texto</h3><p>Leitura em voz alta.</p></div></div>
+  </div>
+  <p class="center" style="margin-top:26px;color:var(--ink2)">Segundo WCAG 2.2 e Desenho Universal para a Aprendizagem.</p>
+  <div class="center" style="margin-top:30px"><a class="btn btn-primary" href="#contato">Receba um piloto gratuito →</a></div>
+ </div>
+</section>
+
+<!-- FAQ -->
+<section class="alt" id="faq" aria-labelledby="h-faq">
+ <div class="wrap" style="max-width:860px">
+  <div class="center"><h2 id="h-faq">Perguntas frequentes</h2></div>
+  <div style="margin-top:36px">
+   <details><summary>Quanto tempo leva para adaptar uma disciplina?</summary><p>Depende do volume e da complexidade. O piloto de uma disciplina já mostra o ritmo real, e o prazo por lote vai na proposta.</p></details>
+   <details><summary>Funciona no meu AVA?</summary><p>Entregamos em SCORM 1.2 e 2004, padrão aceito pela maioria dos AVAs, além de HTML e PDF. Testamos o pacote na sua plataforma durante o piloto.</p></details>
+   <details><summary>Quem valida as adaptações?</summary><p>Uma equipe de psicopedagogos, a mesma que produz as adaptações. Cada unidade só é entregue depois dessa validação.</p></details>
+   <details><summary>O conteúdo técnico é alterado?</summary><p>Reorganizamos e explicamos, mas a informação acadêmica é preservada. Qualquer trecho que exija decisão de conteúdo é sinalizado ao professor, que faz a revisão técnica final.</p></details>
+   <details><summary>Vocês substituem o núcleo de acessibilidade ou o laudo?</summary><p>Não. Somos uma ferramenta para o núcleo da sua instituição. Não substituímos laudo nem atendimento educacional especializado.</p></details>
+   <details><summary>Isso garante nota no MEC ou melhora de desempenho?</summary><p>Não prometemos esse resultado. Nota em avaliação e desempenho dos alunos dependem de vários fatores que ficam com a instituição. O material é uma parte dessa contribuição: é desenhado segundo WCAG 2.2 e DUA, e o teste na sua plataforma acontece no piloto.</p></details>
+   <details><summary>E se a instituição não tiver os direitos do material?</summary><p>Sem problema. Você nos envia a ementa e o plano da disciplina, tratados com a mesma confidencialidade, e produzimos um Objeto de Aprendizagem Acessível (OAA) inédito, como material de apoio ao estudante. O OAA passa a ser integralmente da instituição contratante.</p></details>
+   <details><summary>O piloto é mesmo gratuito?</summary><p>Sim. Adaptamos uma disciplina inteira, sem custo e sem compromisso de contratação.</p></details>
+   <details><summary>Meus materiais ficam protegidos?</summary><p>Sim. Assinamos contrato de confidencialidade (NDA) antes de receber qualquer arquivo. O material é usado só na sua adaptação, o tratamento de dados segue a LGPD, e não divulgamos o conteúdo do seu material. O nome da instituição só é citado com a sua autorização. Ao fim do piloto, excluímos os arquivos se você pedir. Por isso a demonstração do site usa conteúdo próprio.</p></details>
+   <details><summary>Preciso saber o perfil de cada aluno?</summary><p>Não. A unidade oferece opções de leitura que qualquer aluno liga ou desliga, sem precisar se identificar.</p></details>
+   <details><summary>Como começamos?</summary><p>Uma conversa de 30 minutos, o piloto gratuito de uma disciplina inteira do seu material e, se fizer sentido, uma proposta por lote de disciplinas.</p></details>
+  </div>
+ </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato" aria-labelledby="h-c">
+ <div class="wrap grid">
+  <div>
+   <h2 id="h-c">Receba uma disciplina inteira adaptada, grátis</h2>
+   <p class="selecao" id="pilotoSel" hidden></p>
+   <ul class="checks"><li>Piloto gratuito de uma disciplina inteira</li><li>Confidencialidade em contrato (NDA)</li><li>Testado no seu AVA</li></ul>
+   <p class="urg">Comece agora e chegue ao semestre 2027.1 com material pronto.</p>
+  </div>
+  <form id="form" novalidate>
+   <label for="fp">O que você prefere?</label>
+   <select id="fp"><option>Piloto gratuito de uma disciplina</option><option>Agendar reunião de 30 minutos</option><option>Entender melhor antes</option></select>
+   <label for="fn">Nome</label><input id="fn" required autocomplete="name">
+   <label for="fi">Instituição</label><input id="fi" required autocomplete="organization">
+   <label for="fe">E-mail institucional</label><input id="fe" type="email" required autocomplete="email">
+   <label for="fa">Área da disciplina</label>
+   <select id="fa"><option>Ainda não sei</option><option>Saúde</option><option>Direito</option><option>Exatas e Engenharias</option><option>Gestão e Negócios</option><option>Humanas e Educação</option><option>Tecnologia</option></select>
+   <details class="mais"><summary>Adicionar cargo e mensagem</summary><label for="fc">Cargo</label><input id="fc" autocomplete="organization-title"><label for="fm">Mensagem</label><textarea id="fm" rows="3"></textarea></details>
+   <label style="display:flex;gap:10px;font-weight:500;font-size:.85rem;align-items:flex-start"><input type="checkbox" id="fk" required style="width:auto;min-height:0;margin:3px 0 0"><span>Li a <a href="#privacidade" target="_blank" rel="noopener">Política de Privacidade</a> e sei que meus dados serão usados só para responder a esta solicitação.</span></label>
+   <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;margin-top:14px">Quero meu piloto gratuito</button>
+   <p class="note">Resposta em até 2 dias úteis, direto da equipe.</p>
+   <div class="ok-msg" id="okMsg" role="status"></div>
+  </form>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="wrap">
+  <div><b style="color:#fff;font-size:1.1rem;letter-spacing:-.02em">COGNITIVA<span style="color:#DFB565">.</span></b><br>Adaptação de materiais EAD para neurodiversidade.</div>
+  <div><span data-emp="email">cognitiva@cognitivaead.com.br</span><br>www.cognitivaead.com.br</div>
+  <div class="legal-links"><a href="#privacidade">Política de Privacidade</a><a href="#termos">Termos de Uso</a></div>
+ </div>
+ <div class="wrap" style="margin-top:18px;font-size:.8rem;opacity:.85"><div id="empLinha">© 2026 Cognitiva. Todos os direitos reservados.</div></div>
+</footer>
+<div id="legalView" hidden><div class="wrap legal"><a class="back" href="#">← Voltar ao site</a>
+<article id="lg-privacidade" hidden><h1>Política de Privacidade</h1>
+<p><strong>Versão 1.0 · Vigência a partir de <mark class="ph" data-k="vigencia">[DATA DE VIGÊNCIA]</mark></strong></p>
+<p>Esta Política explica, de forma clara, como a <strong>69.070.436 BRENNO ELOY DA CUNHA MARIBONDO</strong>, nome de fantasia <strong>Cognitiva</strong> ("Cognitiva", "nós"), trata dados pessoais no site <strong>www.cognitivaead.com.br</strong> e na prestação de seus serviços de adaptação de materiais educacionais, em conformidade com a Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais, "LGPD"), o Marco Civil da Internet (Lei nº 12.965/2014) e demais normas aplicáveis.</p>
+<h2>1. Quem somos e como falar conosco</h2>
+<ul>
+<li><strong>Controladora</strong> dos dados tratados por meio do site e do relacionamento comercial: 69.070.436 BRENNO ELOY DA CUNHA MARIBONDO, CNPJ 69.070.436/0001-53, com endereço fiscal em Avenida Governador Argemiro de Figueiredo, 210, sala 102, Jardim Oceania, João Pessoa/PB, CEP 58037-030.</li>
+<li><strong>Canal de privacidade (contato para titulares e para a ANPD):</strong> cognitiva@cognitivaead.com.br.</li>
+<li>A Cognitiva é agente de tratamento de pequeno porte, nos termos da regulamentação da Autoridade Nacional de Proteção de Dados (ANPD). Mantemos um canal de atendimento a titulares. A responsável por esse atendimento é o titular da empresa, Brenno Eloy da Cunha Maribondo.</li>
+</ul>
+<h2>2. A quem esta Política se aplica</h2>
+<p>Aplica-se a: (a) visitantes do site; (b) representantes de instituições de ensino e demais pessoas que entram em contato conosco, solicitam piloto, proposta ou reunião; (c) pessoas cujos dados constem dos materiais que as instituições nos enviam para adaptação (por exemplo, autores e docentes), nos termos da seção 4.</p>
+<p><strong>O site não é direcionado a crianças e adolescentes</strong> e não coletamos intencionalmente dados de menores de 18 anos. O serviço é oferecido a pessoas jurídicas (B2B).</p>
+<p><strong>Não solicitamos nem tratamos laudos, diagnósticos ou dados de saúde de estudantes.</strong> Quando os pacotes que entregamos são usados por alunos, o tratamento de dados dos alunos é de responsabilidade da instituição de ensino, como explicado na seção 5.</p>
+<h2>3. Dados que tratamos pelo site e pelo relacionamento comercial</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Dados</th>
+<th>Origem</th>
+<th>Finalidade</th>
+<th>Base legal (LGPD, art. 7º)</th>
+<th>Prazo de guarda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nome, cargo, instituição, e-mail institucional, área de interesse, preferência (piloto, reunião, dúvidas) e mensagem, preenchidos no formulário</td>
+<td>Você, ao enviar o formulário</td>
+<td>Responder ao contato, agendar reunião, avaliar e propor o piloto e a contratação</td>
+<td>Procedimentos preliminares a contrato a pedido do titular (inciso V); legítimo interesse (inciso IX)</td>
+<td>Até 24 meses após o último contato, ou até você pedir a exclusão</td>
+</tr>
+<tr>
+<td>Registro do aceite do formulário (data e hora do envio)</td>
+<td>Gerado no envio</td>
+<td>Comprovar que o contato foi solicitado por você</td>
+<td>Exercício regular de direitos (inciso VI)</td>
+<td>Mesmo prazo acima</td>
+</tr>
+<tr>
+<td>Histórico de e-mails, reuniões e propostas</td>
+<td>Relacionamento comercial</td>
+<td>Gestão do relacionamento, elaboração de proposta e contrato</td>
+<td>Procedimentos preliminares a contrato (inciso V); execução de contrato (inciso V); legítimo interesse (inciso IX)</td>
+<td>Durante a relação e pelo prazo necessário ao cumprimento de obrigações legais e ao exercício regular de direitos, em geral até 5 anos após o término</td>
+</tr>
+<tr>
+<td>Dados técnicos de acesso (endereço IP, navegador, data e hora)</td>
+<td>Navegação no site</td>
+<td>Segurança, estabilidade e prevenção de fraudes</td>
+<td>Legítimo interesse (inciso IX); cumprimento de obrigação legal (Marco Civil, quando aplicável)</td>
+<td>Conforme o provedor de hospedagem e a lei</td>
+</tr>
+<tr>
+<td>Dados de clientes e fornecedores para fins fiscais e contratuais</td>
+<td>Contratos</td>
+<td>Faturamento, cumprimento de obrigações legais e fiscais</td>
+<td>Cumprimento de obrigação legal (inciso II); execução de contrato (inciso V)</td>
+<td>Prazos legais (em regra, 5 anos)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Legítimo interesse:</strong> usamos esta base apenas quando o tratamento é compatível com a sua expectativa de contato profissional e não prevalece sobre os seus direitos. Você pode se opor a qualquer momento (seção 10).</p>
+<p><strong>Não enviamos comunicações de marketing em massa</strong> e não vendemos, alugamos ou cedemos seus dados a terceiros para publicidade.</p>
+<h2>4. Materiais enviados pelas instituições (piloto e contratos)</h2>
+<p>Para adaptar uma disciplina, recebemos materiais didáticos da instituição contratante, que podem conter dados pessoais de autores, docentes e outras pessoas citadas.</p>
+<ul>
+<li>Nesse caso, a <strong>instituição é a controladora</strong> e a Cognitiva atua como <strong>operadora</strong>, tratando os dados <strong>somente</strong> para a prestação do serviço e conforme as instruções do contrato.</li>
+<li>Antes do envio de qualquer material, firmamos <strong>contrato de confidencialidade (NDA)</strong> e, quando aplicável, cláusulas de proteção de dados com a instituição.</li>
+<li><strong>Solicitamos que as instituições não enviem dados pessoais de alunos, laudos ou documentos de saúde.</strong> Se isso ocorrer por engano, devemos ser avisados para que os dados sejam excluídos.</li>
+<li><strong>Quando a instituição não detém os direitos sobre o material</strong>, ela nos informa e utilizamos apenas o serviço de Objetos de Aprendizagem Acessíveis (OAA): a instituição envia as ementas e os planos da disciplina, tratados com o mesmo sigilo, e a Cognitiva produz material inédito de apoio ao estudante, que passa a ser integralmente da instituição contratante.</li>
+<li>Usamos o material <strong>apenas</strong> para a adaptação contratada. Não o divulgamos, não o utilizamos para outros clientes e não o citamos em portfólio. O nome da instituição só é citado com autorização escrita.</li>
+<li>A titularidade dos direitos autorais sobre o conteúdo original permanece com a instituição ou com os respectivos autores. A instituição declara possuir os direitos necessários para autorizar a adaptação.</li>
+<li>Ao final do piloto ou do contrato, <strong>excluímos os arquivos recebidos quando a instituição solicitar</strong>, ressalvadas as cópias que precisemos manter por obrigação legal ou exercício regular de direitos.</li>
+</ul>
+<h2>5. Pacotes entregues (SCORM, HTML e PDF) e dados dos alunos</h2>
+<ul>
+<li>As unidades que entregamos <strong>não enviam dados pessoais dos alunos para a Cognitiva</strong>.</li>
+<li>As <strong>preferências de leitura</strong> (por exemplo, tema, tamanho do texto) ficam armazenadas no navegador do próprio aluno.</li>
+<li>O <strong>progresso e a nota</strong> são registrados pelo ambiente virtual de aprendizagem (AVA) da instituição, por meio do padrão SCORM. A instituição é a controladora desses dados e responde pelo seu tratamento.</li>
+<li>Algumas unidades podem carregar o <strong>VLibras</strong>, ferramenta do Governo Federal de tradução para Libras, que é um serviço de terceiro com política própria (seção 8).</li>
+</ul>
+<h2>6. Com quem compartilhamos dados</h2>
+<p>Compartilhamos dados apenas quando necessário e sob dever de confidencialidade:</p>
+<ul>
+<li><strong>Profissionais e colaboradores contratados</strong> (como psicopedagogos e produtores de conteúdo, pessoas jurídicas ou autônomas) que participam da adaptação, sujeitos a NDA e a obrigações de proteção de dados.</li>
+<li><strong>Fornecedores de tecnologia</strong> (hospedagem do site, e-mail, armazenamento e ferramentas de produtividade), que tratam dados em nosso nome.</li>
+<li><strong>Serviço de envio do formulário (Formsubmit):</strong> serve unicamente como ponte para entregar a mensagem do formulário ao e-mail da Cognitiva. Não o utilizamos como banco de dados, e os dados não são usados por nós para nenhuma outra finalidade por meio dele.</li>
+<li><strong>Ferramentas de inteligência artificial</strong> (seção 7).</li>
+<li><strong>Contador, assessoria jurídica e consultores</strong>, quando necessário.</li>
+<li><strong>Autoridades públicas</strong>, quando houver obrigação legal ou ordem judicial.</li>
+</ul>
+<p>Não vendemos dados pessoais.</p>
+<h2>7. Uso de inteligência artificial</h2>
+<p>Os materiais adaptados pela Cognitiva <strong>podem contar com o apoio de inteligência artificial generativa</strong> em etapas da produção. Todo conteúdo é <strong>revisado e validado por profissionais</strong> antes da entrega, e nenhuma decisão automatizada que afete direitos de pessoas é tomada com base nesses dados.</p>
+<p>Adotamos medidas para que o conteúdo dos clientes seja tratado sob termos que protegem a confidencialidade, e informamos sobre esse apoio na proposta e no contrato.</p>
+<h2>8. Cookies, tecnologias similares e serviços de terceiros</h2>
+<ul>
+<li>O nosso site <strong>não utiliza cookies de rastreamento, de publicidade ou de análise de comportamento</strong>. Se isso mudar, atualizaremos esta Política e, quando necessário, solicitaremos o seu consentimento.</li>
+<li>O site pode carregar recursos de terceiros, como o widget <strong>VLibras</strong> (Governo Federal) e o serviço Formsubmit, usado apenas como ponte de envio do formulário ao nosso e-mail. Esses serviços podem registrar o seu endereço IP e utilizar cookies técnicos, segundo as suas próprias políticas, sobre as quais não temos controle.</li>
+</ul>
+<h2>9. Transferência internacional de dados</h2>
+<p>Alguns fornecedores (por exemplo, a ponte de envio do formulário, o e-mail e o armazenamento) podem processar dados em servidores fora do Brasil. Nessas hipóteses, a transferência ocorre nos termos do art. 33 da LGPD e da regulamentação da ANPD, com a adoção de garantias adequadas de proteção.</p>
+<h2>10. Seus direitos (art. 18 da LGPD)</h2>
+<p>Você pode solicitar, a qualquer momento e gratuitamente:</p>
+<ul>
+<li>confirmação de que tratamos seus dados e acesso a eles;</li>
+<li>correção de dados incompletos, inexatos ou desatualizados;</li>
+<li>anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a lei;</li>
+<li>portabilidade dos dados, nos termos da regulamentação;</li>
+<li>eliminação dos dados tratados com base em consentimento;</li>
+<li>informação sobre as entidades com as quais compartilhamos dados;</li>
+<li>informação sobre a possibilidade de não fornecer consentimento e sobre as consequências da recusa;</li>
+<li>revogação do consentimento, quando for a base legal utilizada;</li>
+<li>oposição ao tratamento realizado com base em legítimo interesse;</li>
+<li>revisão de decisões tomadas unicamente com base em tratamento automatizado, se houver.</li>
+</ul>
+<p><strong>Como exercer:</strong> escreva para cognitiva@cognitivaead.com.br informando nome, instituição e o pedido. Podemos solicitar informações para confirmar a sua identidade. Responderemos de forma simplificada de imediato, quando possível, ou com declaração completa em até <strong>15 dias</strong>, conforme o art. 19 da LGPD.</p>
+<p>Você também pode apresentar reclamação à <strong>Autoridade Nacional de Proteção de Dados (ANPD)</strong>.</p>
+<h2>11. Segurança da informação</h2>
+<p>Adotamos medidas técnicas e organizacionais razoáveis para proteger os dados, incluindo: controle de acesso restrito a quem precisa, autenticação, uso de conexões criptografadas (HTTPS), compromisso de confidencialidade com colaboradores e fornecedores, armazenamento em serviços de provedores reconhecidos e exclusão de arquivos ao fim do uso. Nenhum sistema é totalmente imune a riscos, e trabalhamos para reduzi-los continuamente.</p>
+<h2>12. Incidentes de segurança</h2>
+<p>Em caso de incidente de segurança que possa acarretar risco ou dano relevante aos titulares, comunicaremos a ANPD e os titulares afetados, bem como a instituição contratante quando atuarmos como operadora, no prazo e na forma previstos na regulamentação aplicável.</p>
+<h2>13. Links para outros sites</h2>
+<p>O site pode conter links para sites de terceiros. Não somos responsáveis pelas políticas de privacidade e pelo conteúdo desses sites.</p>
+<h2>14. Alterações desta Política</h2>
+<p>Podemos atualizar esta Política para refletir mudanças legais ou em nossas práticas. A versão vigente estará sempre publicada no site, com a data de vigência. Mudanças relevantes serão destacadas.</p>
+<h2>15. Legislação e foro</h2>
+<p>Esta Política é regida pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca de João Pessoa/PB para dirimir controvérsias, ressalvadas as hipóteses em que a lei determine foro diverso.</p>
+<h2>16. Contato</h2>
+<p>69.070.436 BRENNO ELOY DA CUNHA MARIBONDO · CNPJ 69.070.436/0001-53 · Avenida Governador Argemiro de Figueiredo, 210, sala 102, Jardim Oceania, João Pessoa/PB, CEP 58037-030
+Privacidade: cognitiva@cognitivaead.com.br</p></article>
+<article id="lg-termos" hidden><h1>Termos de Uso do Site</h1>
+<p><strong>Versão 1.0 · Vigência a partir de <mark class="ph" data-k="vigencia">[DATA DE VIGÊNCIA]</mark></strong></p>
+<p>Ao acessar o site <strong>www.cognitivaead.com.br</strong> ("Site"), mantido por <strong>69.070.436 BRENNO ELOY DA CUNHA MARIBONDO</strong>, CNPJ 69.070.436/0001-53, nome de fantasia <strong>Cognitiva</strong>, você concorda com estes Termos. Se não concordar, não utilize o Site. O tratamento de dados pessoais está descrito na Política de Privacidade.</p>
+<h2>1. Finalidade do Site</h2>
+<p>O Site apresenta os serviços da Cognitiva, de adaptação de materiais educacionais para estudantes neurodivergentes, e permite o contato comercial. O Site é voltado a pessoas jurídicas e a profissionais que atuam em instituições de ensino.</p>
+<h2>2. Demonstração interativa e conteúdos de exemplo</h2>
+<ul>
+<li>Os conteúdos exibidos na demonstração interativa (incluindo textos de áreas como saúde, direito, exatas e gestão) são <strong>exemplos ilustrativos produzidos pela Cognitiva</strong>, apenas para mostrar o funcionamento do serviço.</li>
+<li>Esses conteúdos <strong>não constituem aconselhamento jurídico, médico, financeiro ou profissional</strong> e não devem ser usados como fonte de estudo ou decisão.</li>
+<li>As simulações de condições de leitura (por exemplo, dislexia, TDAH, visão reduzida) são <strong>aproximações educativas</strong>; cada pessoa vive essas condições de modo diferente, e a simulação não representa nem substitui a experiência de nenhuma pessoa.</li>
+<li>As adaptações apresentadas mostram o <strong>padrão de trabalho</strong>; o resultado em cada disciplina depende do material de origem e do que for acordado em contrato.</li>
+</ul>
+<h2>3. Dados e fontes citados</h2>
+<p>Os dados públicos exibidos no Site (por exemplo, estatísticas do ensino superior) são referenciados às fontes indicadas e podem ser atualizados ou revistos pelas entidades que os divulgam. Não garantimos que sejam os mais recentes.</p>
+<h2>4. Piloto gratuito</h2>
+<ul>
+<li>O piloto gratuito consiste na adaptação de uma disciplina inteira, mediante análise de viabilidade e <strong>acordo escrito entre as partes</strong>, incluindo a assinatura de contrato de confidencialidade (NDA) antes do envio de qualquer material.</li>
+<li>A solicitação pelo Site <strong>não gera, por si só, obrigação</strong> de realização do piloto, nem de contratação por qualquer das partes. A Cognitiva pode recusar ou adiar solicitações, por exemplo, por falta de capacidade ou por incompatibilidade do material.</li>
+<li>A instituição declara ter os direitos necessários sobre o material enviado (inclusive de terceiros, como editoras) para autorizar a adaptação, e é responsável por informar previamente quando não os tiver, respondendo por eventual violação de direitos de terceiros.</li>
+<li>Quando a instituição não detém os direitos, o serviço é limitado aos Objetos de Aprendizagem Acessíveis (OAA): a partir das ementas e dos planos da disciplina, a Cognitiva produz material inédito de apoio ao estudante, que passa a ser integralmente da instituição contratante.</li>
+<li>Os prazos, formatos, validação e eventual continuidade serão definidos no acordo escrito. A Cognitiva não garante resultados em avaliações do MEC nem melhora de desempenho dos estudantes, fatores que dependem de elementos sob controle da instituição. O material é uma parte dessa contribuição.</li>
+</ul>
+<h2>5. Uso permitido do Site</h2>
+<p>Você concorda em não: (a) usar o Site para fins ilícitos; (b) tentar acessar áreas restritas, interferir no funcionamento ou sobrecarregar o Site; (c) inserir códigos maliciosos; (d) usar mecanismos automatizados para extrair conteúdo em larga escala; (e) fornecer dados falsos ou de terceiros sem autorização no formulário.</p>
+<h2>6. Propriedade intelectual</h2>
+<p>O Site, a marca <strong>Cognitiva</strong>, o logotipo, textos, layout, demonstração e demais elementos são de titularidade da 69.070.436 BRENNO ELOY DA CUNHA MARIBONDO ou licenciados a ela, protegidos pela legislação de propriedade intelectual. É proibida a reprodução, adaptação ou uso comercial sem autorização prévia e escrita. Marcas e nomes de terceiros pertencem aos seus titulares, e só são exibidos com autorização.</p>
+<h2>7. Serviços e links de terceiros</h2>
+<p>O Site pode utilizar ou apontar para serviços de terceiros (como o VLibras, do Governo Federal, e o Formsubmit, usado apenas como ponte de envio do formulário, e serviços de hospedagem). Esses serviços têm termos e políticas próprios, e a Cognitiva não responde por sua disponibilidade ou conteúdo.</p>
+<h2>8. Disponibilidade e limitação de responsabilidade</h2>
+<p>O Site é oferecido "como está". Empregamos esforços razoáveis para mantê-lo disponível e seguro, mas não garantimos funcionamento ininterrupto ou livre de erros. Na máxima extensão permitida em lei, a Cognitiva não responde por danos indiretos, lucros cessantes ou perdas decorrentes do uso ou da impossibilidade de uso do Site. Nada nestes Termos limita responsabilidades que não possam ser limitadas por lei.</p>
+<h2>9. Acessibilidade</h2>
+<p>A Cognitiva busca tornar o Site acessível e está em constante aprimoramento. Se você encontrar uma barreira de acessibilidade, avise-nos em cognitiva@cognitivaead.com.br para que possamos corrigi-la.</p>
+<h2>10. Alterações</h2>
+<p>Podemos alterar estes Termos a qualquer momento. A versão vigente fica publicada no Site, com a data de vigência. O uso do Site após a alteração indica concordância com a nova versão.</p>
+<h2>11. Legislação e foro</h2>
+<p>Estes Termos são regidos pelas leis brasileiras. Fica eleito o foro da comarca de João Pessoa/PB, ressalvadas as hipóteses em que a lei determine foro diverso.</p>
+<h2>12. Contato</h2>
+<p>69.070.436 BRENNO ELOY DA CUNHA MARIBONDO · CNPJ 69.070.436/0001-53 · Avenida Governador Argemiro de Figueiredo, 210, sala 102, Jardim Oceania, João Pessoa/PB, CEP 58037-030 · cognitiva@cognitivaead.com.br</p></article></div></div>
+
+<div class="sticky" id="sticky" role="region" aria-label="Convite"><span id="stickyTxt">Uma disciplina inteira adaptada, de graça</span><a class="btn btn-gold" href="#contato">Receba o piloto →</a><button class="x" id="stickyX" aria-label="Fechar">×</button></div>
+<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js" async onload="try{new window.VLibras.Widget('https://vlibras.gov.br/app')}catch(e){}" onerror="void 0"></script>
+<script>
+(function(){
+'use strict';
+var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var root=document.documentElement;
+/* ---------- header / comfort ---------- */
+var panel=$('#panel'),bc=$('#btnComfort');
+bc.addEventListener('click',function(){var o=panel.classList.toggle('open');bc.setAttribute('aria-expanded',o)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){panel.classList.remove('open');bc.setAttribute('aria-expanded','false');$('#nav').classList.remove('open')}});
+function seg(id,fn){$$('#'+id+' button').forEach(function(b){b.addEventListener('click',function(){$$('#'+id+' button').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');fn(b)})})}
+seg('segTheme',function(b){root.setAttribute('data-theme',b.dataset.t)});
+seg('segSize',function(b){root.style.setProperty('--fs',b.dataset.s)});
+seg('segSp',function(b){root.style.setProperty('--ls',b.dataset.l)});
+var bm=$('#btnMenu');bm.addEventListener('click',function(){var o=$('#nav').classList.toggle('open');bm.setAttribute('aria-expanded',o)});
+$$('#nav a').forEach(function(a){a.addEventListener('click',function(){$('#nav').classList.remove('open')})});
+/* ---------- hero compare ---------- */
+var cmp=$('#cmp'),cr=$('#cmpR');
+cr.addEventListener('input',function(){cmp.style.setProperty('--pos',cr.value+'%')});
+$$('.snap button').forEach(function(b){b.addEventListener('click',function(){cr.value=b.dataset.pos;cmp.style.setProperty('--pos',b.dataset.pos+'%')})});
+if(!reduce){var t0=null,anim=true;cr.addEventListener('pointerdown',function(){anim=false});cr.addEventListener('keydown',function(){anim=false});
+ (function step(ts){if(!anim)return;t0=t0||ts;var v=50+50*Math.sin((ts-t0)/1400);if(ts-t0>5600){anim=false;return}cmp.style.setProperty('--pos',v+'%');cr.value=v;requestAnimationFrame(step)})(0)}
+/* ---------- tabs ---------- */
+var tabs=$$('.tab');
+function showTab(i,focus){tabs.forEach(function(t,k){var s=k===i;t.setAttribute('aria-selected',s);t.tabIndex=s?0:-1;$('#'+t.getAttribute('aria-controls')).hidden=!s});if(focus)tabs[i].focus()}
+tabs.forEach(function(t,i){t.addEventListener('click',function(){showTab(i)});t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){showTab((i+1)%3,true)}if(e.key==='ArrowLeft'){showTab((i+2)%3,true)}})});
+showTab(0);
+$('#goT2').addEventListener('click',function(){showTab(1);$('#experiencia').scrollIntoView({behavior:reduce?'auto':'smooth'})});
+/* ---------- Ato 1: simulações ---------- */
+var simText=$('#simText'),simBox=$('#simBox'),orig=simText.textContent,simMode='none',simTimer=null,dTimer=null;
+function scr(w){if(w.length<4)return w;var m=w.slice(1,-1).split('');for(var i=m.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=m[i];m[i]=m[j];m[j]=t}return w[0]+m.join('')+w[w.length-1]}
+function dysTick(){simText.textContent=orig.split(' ').map(function(w){return Math.random()<.4?scr(w):w}).join(' ')}
+var dist=['💬 Nova mensagem no WhatsApp','📧 12 e-mails não lidos','📅 Reunião em 10 min','🔋 Bateria em 15%','⬆️ Atualização disponível','📰 Última hora: veja agora','❤️ Alguém curtiu sua foto','📹 Chamada de vídeo perdida','📦 Seu pedido saiu para entrega','⏰ Alarme: buscar as crianças','🍪 Aceitar cookies?','🎵 Nova playlist para você','🏦 Fatura vence amanhã','☁️ Chuva forte às 18h','🛒 Oferta relâmpago: 40% off','📥 Download concluído'];
+var bag=[];function nextD(){if(!bag.length){bag=dist.slice();for(var i=bag.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=bag[i];bag[i]=bag[j];bag[j]=t}}return bag.pop()}
+function addD(){var d=document.createElement('div');d.className='distract';d.setAttribute('aria-hidden','true');d.textContent=nextD();d.style.left=Math.random()*60+'%';d.style.top=Math.random()*75+'%';simBox.appendChild(d);setTimeout(function(){d.style.left=Math.random()*60+'%';d.style.top=Math.random()*75+'%'},60);setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},3200)}
+var qs={none:'Agora imagine estudar uma disciplina inteira assim, à noite, depois do trabalho.',dys:'Cada palavra exige um esforço extra de decodificação. Ler dez páginas assim cansa muito mais.',adhd:'Entre uma frase e outra, o foco precisa ser reconquistado. Parágrafos longos viram uma maratona.',low:'Sem contraste e sem estrutura, nem dá para saber por onde começar a ler.'};
+function setSim(m){simMode=m;clearInterval(simTimer);clearInterval(dTimer);simText.textContent=orig;simBox.classList.toggle('low',m==='low');$$('.distract',simBox).forEach(function(x){x.remove()});
+ if(m==='dys'){dysTick();if(!reduce)simTimer=setInterval(dysTick,900)}
+ if(m==='adhd'){addD();if(!reduce)dTimer=setInterval(addD,1100);else{addD()}}
+ $('#simQ').textContent=qs[m]}
+$$('[data-sim]').forEach(function(b){b.addEventListener('click',function(){$$('[data-sim]').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');setSim(b.dataset.sim)})});
+/* ---------- Ato 2: conteúdo ---------- */
+var AREAS={
+ 'Saúde':{orig:'A homeostase é o conjunto de mecanismos pelos quais o organismo mantém relativamente constantes as condições do meio interno, a despeito das variações do ambiente externo, o que se dá, predominantemente, por meio de circuitos de retroalimentação negativa nos quais um sensor detecta o desvio de determinada variável em relação ao seu ponto de ajuste, um centro integrador compara a informação recebida com o valor de referência e um efetor desencadeia resposta que se opõe à alteração inicial, restabelecendo o equilíbrio, como ocorre na termorregulação e no controle da glicemia.',
+  titulo:'Homeostase',obj:'Ao final, você vai saber explicar como o corpo mantém o seu meio interno estável.',
+  blocks:[
+   {h:'O que é homeostase',t:'<span class="T" data-d="Homeostase: capacidade do organismo de manter o meio interno estável.">Homeostase</span> é a capacidade do corpo de manter o meio interno estável, mesmo quando o ambiente muda.'},
+   {h:'Como o corpo faz isso',t:'O corpo usa um circuito com três peças:<ol><li><b>Sensor:</b> detecta a mudança.</li><li><b>Centro integrador:</b> compara com o <span class="T" data-d="Ponto de ajuste: valor que o corpo tenta manter, por exemplo, cerca de 37 °C de temperatura.">ponto de ajuste</span>.</li><li><b>Efetor:</b> age para desfazer a mudança.</li></ol>'},
+   {h:'Retroalimentação negativa',t:'A resposta vai na direção <b>oposta</b> à mudança. Se a temperatura sobe, o corpo age para baixá-la. Por isso o nome é "negativa".'}],
+  ex:'Você corre sob o sol e a temperatura do corpo sobe. O cérebro compara com o valor ideal (cerca de 37 °C). As glândulas sudoríparas começam a suar e a temperatura volta ao normal.',
+  q:'No exemplo da corrida, quem é o efetor?',o:['A pele sentindo calor','As glândulas sudoríparas produzindo suor','O cérebro comparando valores'],c:1,why:'O efetor é quem age para desfazer a mudança. Sentir é o sensor; comparar é o centro integrador.',
+  sum:['Homeostase é manter o meio interno estável.','O circuito tem sensor, centro integrador e efetor.','Na retroalimentação negativa, a resposta se opõe à mudança.']},
+ 'Direito':{orig:'O princípio da legalidade, previsto no artigo 5º, inciso II, da Constituição Federal, estabelece que ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei, de modo que, no âmbito privado, é lícito tudo aquilo que a lei não proíbe, ao passo que, para a Administração Pública, somente é permitido o que a lei expressamente autoriza.',
+  titulo:'Princípio da legalidade',obj:'Ao final, você vai saber diferenciar o que a lei exige de um particular e do Poder Público.',
+  blocks:[
+   {h:'A regra geral',t:'Ninguém é obrigado a fazer ou deixar de fazer algo, a não ser que uma <span class="T" data-d="Lei: norma aprovada pelo Poder Legislativo. Está no art. 5º, II, da Constituição Federal.">lei</span> determine.'},
+   {h:'Para você, como particular',t:'Vale a liberdade: <b>é permitido tudo o que a lei não proíbe</b>.'},
+   {h:'Para o Poder Público',t:'Vale o contrário: a <span class="T" data-d="Administração Pública: órgãos e agentes do Estado que executam serviços públicos, como prefeituras e autarquias.">Administração Pública</span> só pode fazer o que a lei <b>expressamente autoriza</b>.'}],
+  ex:'Você pode abrir uma loja de roupas, pois nenhuma lei proíbe (cumpridas as regras de licença). Já uma prefeitura não pode criar uma taxa que nenhuma lei prevê.',
+  q:'Uma prefeitura quer fazer algo que nenhuma lei menciona. Ela pode?',o:['Sim, porque a lei não proíbe','Não, só pode o que a lei autoriza','Depende da vontade do prefeito'],c:1,why:'Para o Poder Público vale o que a lei autoriza. A regra "tudo o que não é proibido" vale para o particular.',
+  sum:['Regra geral: só a lei obriga.','Particular: pode tudo o que a lei não proíbe.','Poder Público: só pode o que a lei autoriza.']},
+ 'Exatas e Engenharias':{orig:'O desvio padrão é uma medida de dispersão que quantifica o quanto os valores de um conjunto de dados se afastam, em média, da média aritmética, sendo calculado como a raiz quadrada da variância, isto é, da média dos quadrados dos desvios de cada observação em relação à média, de modo que valores menores indicam dados mais concentrados em torno da média e valores maiores indicam maior dispersão.',
+  titulo:'Desvio padrão',obj:'Ao final, você vai saber calcular e interpretar o desvio padrão de um conjunto de notas.',
+  blocks:[
+   {h:'Para que serve',t:'A média diz o valor central. O <span class="T" data-d="Desvio padrão: medida de quanto os valores se afastam, em média, da média do grupo.">desvio padrão</span> diz o quanto os valores <b>se espalham</b> ao redor dela.'},
+   {h:'Como calcular, em 4 passos',t:'<ol><li>Calcule a média.</li><li>Subtraia a média de cada valor.</li><li>Eleve cada diferença ao quadrado e tire a média desses quadrados (a <span class="T" data-d="Variância: média dos quadrados das diferenças em relação à média.">variância</span>).</li><li>Tire a raiz quadrada.</li></ol>'},
+   {h:'Como interpretar',t:'Desvio <b>pequeno</b>: valores parecidos entre si. Desvio <b>grande</b>: valores muito diferentes.'}],
+  ex:'Turma A tem notas 6, 7, 7 e 8. Turma B tem 4, 6, 8 e 10. As duas têm média 7. O desvio padrão da turma A é cerca de 0,7 e o da B é cerca de 2,2.',
+  q:'Com desvio de 0,7 (A) e 2,2 (B), qual turma tem notas mais parecidas entre si?',o:['Turma A','Turma B','As duas, pois têm a mesma média'],c:0,why:'Desvio menor significa valores mais próximos da média e entre si.',
+  sum:['Média mostra o centro; desvio padrão mostra a dispersão.','Calcula-se em 4 passos, terminando na raiz quadrada.','Quanto menor o desvio, mais parecidos os valores.']},
+ 'Gestão e Negócios':{orig:'O fluxo de caixa consiste no registro e na projeção das entradas e saídas de recursos financeiros de uma organização em determinado período, permitindo ao gestor antecipar insuficiências de liquidez, planejar a captação ou a aplicação de excedentes e avaliar a capacidade da empresa de honrar seus compromissos de curto prazo, ainda que apresente lucro contábil no mesmo período.',
+  titulo:'Fluxo de caixa',obj:'Ao final, você vai saber explicar por que uma empresa pode ter lucro e ainda assim ficar sem dinheiro.',
+  blocks:[
+   {h:'O que é',t:'<span class="T" data-d="Fluxo de caixa: controle do dinheiro que entra e que sai da empresa em um período.">Fluxo de caixa</span> é o registro do dinheiro que <b>entra</b> e que <b>sai</b> da empresa, incluindo o que está previsto para os próximos dias.'},
+   {h:'Para que serve',t:'Ele mostra com antecedência se vai faltar dinheiro (<span class="T" data-d="Liquidez: facilidade de a empresa pagar contas de curto prazo com o dinheiro que tem.">liquidez</span>) e ajuda a decidir quando pedir crédito ou investir sobras.'},
+   {h:'Lucro não é caixa',t:'A empresa pode lucrar no papel e ainda assim não ter dinheiro na conta para pagar as contas do mês.'}],
+  ex:'Uma padaria vende R$ 10 mil a prazo e só recebe em 60 dias, mas paga os fornecedores em 30. Tem lucro no papel e caixa negativo no meio do caminho.',
+  q:'A empresa lucrou no mês, mas não tem dinheiro para pagar o aluguel. Isso é possível?',o:['Sim, lucro e caixa são coisas diferentes','Não, lucro sempre vira caixa','Só se a empresa for pequena'],c:0,why:'O lucro é registrado quando a venda acontece; o caixa só muda quando o dinheiro entra ou sai.',
+  sum:['Fluxo de caixa registra entradas e saídas de dinheiro.','Ajuda a antecipar falta de recursos.','Lucro e caixa não são a mesma coisa.']}
+};
+var areaKeys=Object.keys(AREAS),curA=areaKeys[0],curP='padrao';
+var ac=$('#areaChips');
+areaKeys.forEach(function(k,i){var b=document.createElement('button');b.className='chip';b.dataset.a=k;b.setAttribute('aria-pressed',i===0);b.textContent=k;b.addEventListener('click',function(){curA=k;$$('#areaChips .chip').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()});ac.appendChild(b)});
+$$('#profChips .chip').forEach(function(b){b.addEventListener('click',function(){curP=b.dataset.p;$$('#profChips .chip').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()})});
+var profNote={padrao:'Estrutura em blocos, glossário e verificação',tdah:'Um bloco por vez, com progresso e modo foco',dys:'Fonte espaçada, fundo suave, sem justificação',tea:'Estrutura explícita e linguagem literal',lv:'Texto grande, contraste máximo'};
+function bestVoice(){var vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[];var pt=vs.filter(function(v){return /^pt(-|_)BR/i.test(v.lang)||/^pt/i.test(v.lang)});if(!pt.length)return null;var pref=[/natural|neural|online/i,/google/i,/francisca|antonio|thalita|luciana|felipe|vitoria/i];for(var i=0;i<pref.length;i++){var f=pt.filter(function(v){return pref[i].test(v.name)});if(f.length)return f[0]}return pt[0]}
+if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=function(){};
+var state={};
+function render(){
+ var A=AREAS[curA];$('#origPane').textContent=A.orig;$('#profNote').textContent=profNote[curP];
+ var p=$('#unitPane');p.innerHTML='';
+ var u=document.createElement('div');u.className='unit'+(curP==='dys'?' dys':'')+(curP==='lv'?' lv':'');p.appendChild(u);
+ p.style.background=curP==='lv'?'#000':(curP==='dys'?'#FAF3E3':'#fff');
+ state={read:0,total:A.blocks.length+1,answered:false,focus:curP==='tdah',tts:false};
+ var tool=document.createElement('div');tool.className='utool';
+ tool.innerHTML='<button data-act="smaller" aria-label="Diminuir texto">A−</button><button data-act="bigger" aria-label="Aumentar texto">A+</button><button data-act="theme" aria-pressed="false">Tema escuro</button><button data-act="focus" aria-pressed="'+state.focus+'">Modo foco</button>'+('speechSynthesis' in window?'<button data-act="tts" aria-pressed="false">Ouvir</button>':'');
+ u.appendChild(tool);
+ u.insertAdjacentHTML('beforeend','<div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progresso da unidade"><i></i></div><div class="progtxt"><span class="pl">0 de '+state.total+' etapas</span><span>'+A.titulo+'</span></div><div class="obj"><b>Objetivo:</b> '+A.obj+'</div>');
+ if(curP==='tea')u.insertAdjacentHTML('beforeend','<p class="road">Nesta unidade: '+A.blocks.length+' blocos de leitura, 1 exemplo, 1 pergunta de verificação e 1 resumo. Tempo estimado: 4 minutos.</p>');
+ var wrap=document.createElement('div');if(state.focus)wrap.classList.add('focusmode');u.appendChild(wrap);
+ var sequential=(curP==='tdah'||curP==='tea');
+ A.blocks.forEach(function(b,i){
+  var d=document.createElement('div');d.className='blk';d.dataset.i=i;
+  var html='<h4>'+(curP==='tea'?'Bloco '+(i+1)+' de '+A.blocks.length+': ':'')+b.h+'</h4><div>'+b.t.replace(/<span class="T" data-d="([^"]*)">([^<]*)<\/span>/g,function(m,df,tx){return '<button class="term" aria-expanded="false">'+tx+'</button><span class="def" role="note" hidden>'+df+'</span>'})+'</div>';
+  if(curP==='tea')html+='<div class="next">'+(i<A.blocks.length-1?'A seguir: bloco '+(i+2)+'.':'A seguir: exemplo.')+'</div>';
+  d.innerHTML=html;wrap.appendChild(d);
+  if(sequential&&i>0)d.hidden=true;
+ });
+ var rest=document.createElement('div');rest.innerHTML='<div class="ex"><b>Exemplo do dia a dia:</b> '+A.ex+'</div>'+
+  '<div class="chk"><b>Pare e pense:</b> '+A.q+'<div class="opts"></div><div class="fb" aria-live="polite"></div></div>'+
+  '<div class="sum"><b>Resumo</b><ul>'+A.sum.map(function(s){return '<li>'+s+'</li>'}).join('')+'</ul></div><div class="done" role="status">Unidade concluída. Bom trabalho!</div>';
+ if(sequential){rest.hidden=true;var nb=document.createElement('button');nb.className='nextbtn';nb.textContent='Próximo bloco →';u.appendChild(nb);u._nb=nb;}
+ u.appendChild(rest);
+ var opts=$('.opts',rest);
+ A.o.forEach(function(t,k){var b=document.createElement('button');b.textContent=t;b.addEventListener('click',function(){if(state.answered)return;state.answered=true;b.classList.add(k===A.c?'ok':'no');if(k!==A.c)$$('button',opts)[A.c].classList.add('ok');$('.fb',rest).textContent=(k===A.c?'Correto! ':'Quase. ')+A.why;state.read++;upd()});opts.appendChild(b)});
+ var seen={};
+ function mark(i){if(seen[i])return;seen[i]=1;state.read++;upd()}
+ function upd(){var pct=Math.round(state.read/state.total*100);$('.prog i',u).style.width=pct+'%';$('.prog',u).setAttribute('aria-valuenow',pct);$('.pl',u).textContent=Math.min(state.read,state.total)+' de '+state.total+' etapas';if(state.read>=state.total)$('.done',rest).classList.add('show')}
+ var visible=0;
+ function setOn(i){$$('.blk',wrap).forEach(function(x){x.classList.toggle('on',+x.dataset.i===i)})}
+ if(sequential){mark(0);setOn(0);u._nb.addEventListener('click',function(){visible++;var blks=$$('.blk',wrap);if(visible<blks.length){blks[visible].hidden=false;mark(visible);setOn(visible);blks[visible].scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});if(visible===blks.length-1){u._nb.textContent='Ver exemplo →'}}else{rest.hidden=false;u._nb.hidden=true;state.focus=false;wrap.classList.remove('focusmode');var fb=$('[data-act=focus]',u);if(fb)fb.setAttribute('aria-pressed','false')}})}
+ else{$$('.blk',wrap).forEach(function(b){b.addEventListener('mouseenter',function(){setOn(+b.dataset.i)});b.addEventListener('focusin',function(){setOn(+b.dataset.i)});if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){mark(+b.dataset.i);io.disconnect()}})},{threshold:.9});io.observe(b)}else mark(+b.dataset.i)})}
+ u.addEventListener('click',function(e){var t=e.target.closest('.term');if(t){var d=t.nextElementSibling;var o=d.hidden;d.hidden=!o;t.setAttribute('aria-expanded',o);return}
+  var a=e.target.closest('[data-act]');if(!a)return;var act=a.dataset.act,cs=parseFloat(getComputedStyle(u).getPropertyValue('--ufs'))||1;
+  if(act==='bigger')u.style.setProperty('--ufs',Math.min(1.8,cs+.15));
+  if(act==='smaller')u.style.setProperty('--ufs',Math.max(.85,cs-.15));
+  if(act==='theme'){var dk=u.classList.toggle('dark');a.setAttribute('aria-pressed',dk);a.textContent=dk?'Tema claro':'Tema escuro';p.style.background=dk?'#0B1722':'#fff'}
+  if(act==='focus'){state.focus=!state.focus;wrap.classList.toggle('focusmode',state.focus);a.setAttribute('aria-pressed',state.focus);if(state.focus&&!$('.blk.on',wrap))setOn(0)}
+  if(act==='tts'){if(speechSynthesis.speaking){speechSynthesis.cancel();a.setAttribute('aria-pressed','false');return}var txt=A.titulo+'. '+A.obj+' '+A.blocks.map(function(b){return b.h+'. '+b.t.replace(/<[^>]+>/g,'')}).join(' ');var parts=txt.match(/[^.!?]+[.!?]*/g)||[txt];var v=bestVoice();parts.forEach(function(t,k){var s=new SpeechSynthesisUtterance(t.trim());s.lang='pt-BR';if(v)s.voice=v;s.rate=.95;if(k===parts.length-1)s.onend=function(){a.setAttribute('aria-pressed','false')};speechSynthesis.speak(s)});a.setAttribute('aria-pressed','true')}
+ });
+ if(curP==='tdah'||state.focus){}
+}
+render();
+/* ---------- parceiros: preencha a lista; vazia = seção oculta ---------- */
+/* Exemplo: {nome:'Nome da instituição', logo:'data:image/png;base64,...' (opcional)} */
+var PARCEIROS=[];
+var DEPOIMENTO=null; /* Exemplo: {texto:'...', autor:'Nome, cargo, instituição'} */
+(function(){if(!PARCEIROS.length)return;var l=$('#plist');PARCEIROS.forEach(function(p){var c=document.createElement('div');c.className='pcard';if(p.logo){var i=document.createElement('img');i.src=p.logo;i.alt=p.nome;c.appendChild(i)}else{var b=document.createElement('b');b.textContent=p.nome;c.appendChild(b)}l.appendChild(c)});
+ if(DEPOIMENTO){var q=$('#pquote');q.hidden=false;q.textContent='“'+DEPOIMENTO.texto+'”';var m=document.createElement('small');m.textContent=DEPOIMENTO.autor;q.appendChild(m)}
+ $('#parceiros').hidden=false;$('#navPar').hidden=false})();
+/* ---------- convite fixo, interações e pré-seleção ---------- */
+var stk=$('#sticky'),stkOff=false,inter=0,contatoVis=false;
+var PNOME={padrao:'versão padrão',tdah:'TDAH',dys:'dislexia',tea:'TEA',lv:'baixa visão'};
+$('#stickyX').addEventListener('click',function(){stkOff=true;stk.classList.remove('show')});
+if('IntersectionObserver' in window){new IntersectionObserver(function(es){contatoVis=es[0].isIntersecting;upSt()}).observe($('#contato'))}
+function upSt(){var on=!stkOff&&!contatoVis&&window.scrollY>600;stk.classList.toggle('show',on)}
+window.addEventListener('scroll',upSt,{passive:true});
+$('#experiencia').addEventListener('click',function(e){if(e.target.closest('.chip,.term,.opts button,.nextbtn')){inter++;if(inter===2){$('#stickyTxt').textContent='Gostou? Receba uma disciplina inteira com o seu conteúdo';stk.classList.add('pulse');stkOff=false;upSt()}}});
+function selecao(){var el=$('#pilotoSel');if(inter<1){el.hidden=true;return}el.hidden=false;el.textContent='Seu piloto: '+curA+' · '+(PNOME[curP]||'')}
+$('#goForm2').addEventListener('click',function(){var s=$('#fa');for(var i=0;i<s.options.length;i++)if(s.options[i].text===curA)s.selectedIndex=i;selecao();$('#contato').scrollIntoView({behavior:reduce?'auto':'smooth'})});
+function irForm(pref){var f=$('#fp');for(var i=0;i<f.options.length;i++)if(f.options[i].text.indexOf(pref)===0)f.selectedIndex=i;$('#contato').scrollIntoView({behavior:reduce?'auto':'smooth'});setTimeout(function(){$('#fn').focus({preventScroll:true})},500)}
+$('#btnPiloto').addEventListener('click',function(){irForm('Piloto')});
+$('#btnReuniao').addEventListener('click',function(){irForm('Agendar')});
+$('#btnDuvidas').addEventListener('click',function(){$('#faq').scrollIntoView({behavior:reduce?'auto':'smooth'})});
+/* ---------- Ato 3 -> formulário ---------- */
+$$('[data-go]').forEach(function(b){b.addEventListener('click',function(){var s=$('#fa');for(var i=0;i<s.options.length;i++)if(s.options[i].text===b.dataset.go)s.selectedIndex=i;$('#contato').scrollIntoView({behavior:reduce?'auto':'smooth'});setTimeout(function(){$('#fn').focus({preventScroll:true})},500)})});
+/* ---------- formulário ---------- */
+var FORM_ENDPOINT='https://formsubmit.co/ajax/cognitiva@cognitivaead.com.br';
+$('#form').addEventListener('submit',function(e){e.preventDefault();var n=$('#fn').value.trim(),i=$('#fi').value.trim(),m=$('#fe').value.trim();var ok=$('#okMsg');
+ function msg(t,good){ok.style.display='block';ok.style.background=good?'#E3F4E8':'#FBE7E7';ok.style.color=good?'#14532d':'#7a1410';ok.textContent=t}
+ if(!n||!i||!/^\S+@\S+\.\S+$/.test(m)){msg('Preencha nome, instituição e um e-mail válido.',false);return}
+ if(!$('#fk').checked){msg('Marque a autorização para podermos responder.',false);return}
+ var data={_subject:'Solicitação de proposta · '+i,_template:'table',_captcha:'false',Nome:n,Cargo:$('#fc').value,Instituição:i,'E-mail':m,Preferência:$('#fp').value,Área:$('#fa').value,Interesse:(inter>0?curA+' · '+(PNOME[curP]||''):''),Mensagem:$('#fm').value,_replyto:m};
+ var btn=$('#form button[type=submit]');btn.disabled=true;btn.textContent='Enviando…';
+ fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+ .then(function(r){if(!r.ok)throw new Error('http');return r.json()})
+ .then(function(){msg('Recebemos a sua solicitação. Entraremos em contato em até 2 dias úteis.',true);$('#form').reset()})
+ .catch(function(){var body='Nome: '+n+'\nCargo: '+$('#fc').value+'\nInstituição: '+i+'\nE-mail: '+m+'\nPreferência: '+$('#fp').value+'\nÁrea: '+$('#fa').value+'\nInteresse: '+curA+' · '+(PNOME[curP]||'')+'\n\n'+$('#fm').value;msg('Não foi possível enviar agora. Abrimos o seu e-mail com a mensagem pronta; se nada abrir, escreva para cognitiva@cognitivaead.com.br.',false);location.href='mailto:cognitiva@cognitivaead.com.br?subject='+encodeURIComponent('Solicitação de proposta · '+i)+'&body='+encodeURIComponent(body)})
+ .finally(function(){btn.disabled=false;btn.textContent='Quero meu piloto gratuito'})});
+
+/* ---------- jurídico ---------- */
+var EMPRESA={razao:'69.070.436 BRENNO ELOY DA CUNHA MARIBONDO',cnpj:'69.070.436/0001-53',endereco:'Avenida Governador Argemiro de Figueiredo, 210, sala 102, Jardim Oceania, João Pessoa/PB, CEP 58037-030',cidade:'João Pessoa/PB',email:'cognitiva@cognitivaead.com.br',vigencia:''};
+(function(){
+ var pend=[];
+ $$('mark.ph').forEach(function(m){var v=EMPRESA[m.dataset.k];if(v){m.replaceWith(document.createTextNode(v))}else pend.push(m.dataset.k)});
+ window.__phPendentes=pend;
+ $$('[data-emp]').forEach(function(e){if(EMPRESA[e.dataset.emp])e.textContent=EMPRESA[e.dataset.emp]});
+ if(EMPRESA.razao&&EMPRESA.cnpj){$('#empLinha').textContent='© 2026 '+EMPRESA.razao+' · CNPJ '+EMPRESA.cnpj+(EMPRESA.cidade?' · '+EMPRESA.cidade:'')+' · Nome fantasia: Cognitiva'}
+ var main=document.querySelector('main'),lv=$('#legalView');
+ function rota(){
+  var h=location.hash,a=h==='#privacidade'?'lg-privacidade':h==='#termos'?'lg-termos':null;
+  if(a){main.hidden=true;lv.hidden=false;$('#lg-privacidade').hidden=a!=='lg-privacidade';$('#lg-termos').hidden=a!=='lg-termos';document.body.classList.add('legal-open');window.scrollTo(0,0);document.title=(a==='lg-termos'?'Termos de Uso':'Política de Privacidade')+' · Cognitiva'}
+  else if(!main.hidden===false){main.hidden=false;lv.hidden=true;document.body.classList.remove('legal-open');document.title=window.__t0;var t=h&&h.length>1?document.getElementById(h.slice(1)):null;if(t)setTimeout(function(){t.scrollIntoView()},0)}
+ }
+ window.__t0=document.title;
+ window.addEventListener('hashchange',rota);rota();
+})();
+})();
+</script>
+</body>
+</html>
